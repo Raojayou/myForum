@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Topic;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 /**
  * Class PagesController
@@ -11,33 +11,8 @@ use Illuminate\Http\Request;
  */
 class PagesController extends Controller
 {
-    /**
-     * Genera la página de inicio del proyecto.
-     *
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
-     */
-    public function home()
+    public function index()
     {
 
-        $topics = Topic::orderBy('created_at', 'desc')->paginate(9);
-
-        return view('home', [
-            'topics' => $topics,
-        ]);
-    }
-
-    /**
-     * Página de saludo.
-     *
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
-     */
-    public function saludo()
-    {
-        $saludo = "Bienvenidos al Foro";
-        $usuario = "Josan";
-        return view('saludo', [
-            'saludo' => $saludo,
-            'usuario' => $usuario
-        ]);
     }
 }

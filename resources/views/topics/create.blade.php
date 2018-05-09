@@ -5,6 +5,7 @@
     @push('script-head')
         <script src="{{ asset('js/validationForm.js') }}" defer></script>
     @endpush
+
     <div class="container">
         <div class="row">
             <div class="col-md-8 col-md-offset-2">
@@ -45,7 +46,7 @@
                                                 <div class="col-lg-9">
                                                     <select name="category" class="custom-select"
                                                             id="category" title="Categoría del Tema">
-                                                        <option selected>Ninguno seleccionado</option>
+                                                        <option selected value="">Ninguno seleccionado</option>
                                                         <option value="Discusión General">Discusión General</option>
                                                         <option value="Juegos en General">Juegos en General</option>
                                                         <option value="Software & Hardware">Software & Hardware</option>

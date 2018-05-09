@@ -77,41 +77,11 @@
                             </small>
                         </h5>
                     @endauth
-
-                    {{--@include('topics.topic')--}}
-
-                    {{--@forelse($topics->chunk(3) as $chunk)--}}
-                    {{--<div class="row course-set courses__row event d-flex justify-content-around topic">--}}
-                    {{--@foreach($chunk as $topic)--}}
-                    {{--@include('topics.topic')--}}
-                    {{--@endforeach--}}
-                    {{--</div>--}}
-                    {{--<br>--}}
-                    {{--@empty--}}
-                    {{--<p>No hay temas añadidos todavía.</p>--}}
-                    {{--@endforelse--}}
                 </td>
             </tr>
             </tbody>
         </table>
     </div>
-
-    <footer>
-        <div class="container">
-            <span class="text-muted">
-                <p>Encuentranos en nuestras redes sociales.
-                    <a href="https://www.twitter.com/Raojayou1">
-                        <i class="fa fa-twitter"></i></a>
-                    <a href="https://www.facebook.com">
-                        <i class="fa fa-facebook"></i></a>
-                    <a href="https://www.instagram.com/Raojayoulol">
-                        <i class="fa fa-instagram"></i></a>
-                    <a href="https://www.youtube.com/user/Raojayou">
-                        <i class="fa fa-youtube"></i></a>
-                </p>
-            </span>
-        </div>
-    </footer>
 
     {{--<div class="pagination">--}}
     {{--{{ $topics->links('pagination::bootstrap-4') }}--}}

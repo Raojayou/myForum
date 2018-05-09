@@ -102,11 +102,10 @@ function validateTitle() {
 }
 
 function validateCategory() {
-    var regex = /^(?!----$).*/;
     var inputCategory = $("#category");
     var category = inputCategory.val();
 
-    if (category.match(regex) || category === "") {
+    if (category !== "") {
         $('#category').removeClass('is-invalid');
         $('#category').addClass('is-valid');
         $('#errorCategory').html('');
@@ -118,7 +117,7 @@ function validateCategory() {
 }
 
 function validateContent() {
-    var regex = /[^A-Za-z0-9 .'?!,@$#\-_]+/;
+    var regex = /[A-Za-z0-9.'?!,@$#\-_]+/;
     var inputContent = $("#content");
     var content = inputContent.val();
 

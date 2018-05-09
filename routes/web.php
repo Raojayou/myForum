@@ -13,17 +13,18 @@
 
 Route::get('/', 'PagesController@home');
 
+//Route::get('/home', 'HomeController@index')->name('home');
+
 // Rutas al no estar logueado.
 Route::get('/topics/show/{topic}', 'TopicsController@show');
-
 
 
 //Rutas al estar logueado.
 Route::group(['middleware' => 'auth'], function () {
     Route::get('/topics/create', 'TopicsController@create');
-    Route::post('/topics/create', 'TopicsController@store');
-});
+    Route::post('/topics', 'TopicsController@store');
+    Route::post('/topics/validate', 'TopicsController@validateTopicAjax');
 
-Route::get('/home', 'HomeController@index')->name('home');
+});
 
 Auth::routes();

@@ -23,67 +23,32 @@
 
     <!-- Icons -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+
     @stack ('script-head')
 </head>
 <body>
 <div id="app">
-    <nav class="navbar navbar-expand-md navbar-light navbar-laravel">
-        <div class="container">
-            <a class="navbar-brand" href="{{ url('/') }}">
-                {{ config('app.name', 'MyForum') }}
-            </a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-                    aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
+    @include('partials.public.nav')
 
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <!-- Left Side Of Navbar -->
-                <ul class="navbar-nav mr-auto">
-
-                </ul>
-
-                <!-- Right Side Of Navbar -->
-                <ul class="navbar-nav ml-auto">
-                    <!-- Authentication Links -->
-                    @guest
-                        <li><a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a></li>
-                        <li><a class="nav-link" href="{{ route('register') }}">{{ __('Registro') }}</a></li>
-                    @else
-                        <li class="nav-item dropdown">
-                            <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#"
-                               role="button"
-                               data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                {{ Auth::user()->nick }} <span class="caret"></span>
-                            </a>
-                            {{--<i class="fa fa-user-circle"></i>--}}
-
-                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-
-                                <a class="dropdown-item" href="{{ route('logout') }}">
-                                    Perfil
-                                </a>
-                                {{--<i class="fa fa-sign-out"></i>--}}
-                                <a class="dropdown-item" href="{{ route('logout') }}"
-                                   onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                                    {{ __('Logout') }}
-                                </a>
-
-                                <form id="logout-form" action="{{ route('logout') }}" method="POST"
-                                      style="display: none;">
-                                    @csrf
-                                </form>
-                            </div>
-                        </li>
-                    @endguest
-                </ul>
-            </div>
-        </div>
-    </nav>
     @yield('content')
 </div>
 
+<footer>
+    <div class="container">
+        <span class="text-muted">
+            <p>Encuentranos en nuestras redes sociales.
+                <a href="https://www.twitter.com/Raojayou1">
+                    <i class="fa fa-twitter"></i></a>
+                <a href="https://www.facebook.com">
+                    <i class="fa fa-facebook"></i></a>
+                <a href="https://www.instagram.com/Raojayoulol">
+                    <i class="fa fa-instagram"></i></a>
+                <a href="https://www.youtube.com/user/Raojayou">
+                    <i class="fa fa-youtube"></i></a>
+            </p>
+        </span>
+    </div>
+</footer>
 @stack('scripts')
 </body>
 </html>

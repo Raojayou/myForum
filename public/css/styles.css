@@ -1,8 +1,8 @@
-.error {
+.is-invalid {
   border-color: #DC3545;
 }
 
-.valido {
+.is-valid {
   border-color: #28A745;
 }
 

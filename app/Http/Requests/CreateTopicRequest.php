@@ -23,11 +23,13 @@ class CreateTopicRequest extends FormRequest
      */
     public function rules()
     {
-        return [
-            'title' => ['required', 'max:50', 'min:5'],
-            'category' => ['required'],
-            'content' => ['required', 'max:500', 'min:1'],
-        ];
+        $rules = array();
+
+        $rules['title'] = $this->validateTitle();
+        $rules['category'] = $this->validateCategory();
+        $rules['content'] = $this->validateContent();
+
+        return $rules;
     }
 
     /**
@@ -37,16 +39,62 @@ class CreateTopicRequest extends FormRequest
      */
     public function messages()
     {
-        return[
-        'title.required' => 'Introduzca un título válido.',
-        'title.max' => 'Introduzca un título menor de 50 carácteres.',
-        'title.min' => 'Introduzca un título mayor de 5 carácteres.',
+        $mensajesTitle = $this->mensajesTitle();
+        $mensajesCategory = $this->mensajesCategory();
+        $mensajesContent = $this->mensajesContent();
 
-        'category.required' => 'Introduzca una categoría válida.',
+        $mensajes = array_merge(
 
-        'content.required' => 'Introduzca una contenido válido.',
-        'content.max' => 'Introduzca un contenido menor de 500 carácteres.',
-        'content.min' => 'Introduzca un contenido mayor de 1 carácteres.',
-        ];
+            $mensajesTitle,
+            $mensajesCategory,
+            $mensajesContent
+
+        );
+        return $mensajes;
+    }
+
+    protected function validateTitle()
+    {
+        return 'required|string|max:50|min:1';
+    }
+
+    protected function mensajesTitle()
+    {
+        $mensajes = array();
+        $mensajes["title.required"] = 'Introduzca el título.';
+        $mensajes["title.string"] = 'Error en el título.';
+        $mensajes["title.max"] = 'Supera el máximo de 50 carácteres.';
+        $mensajes["title.min"] = 'No supera el mínimo de 1 carácter.';
+
+        return $mensajes;
+    }
+
+    protected function validateCategory()
+    {
+        return 'required';
+    }
+
+    protected function mensajesCategory()
+    {
+        $mensajes = array();
+        $mensajes["category.required"] = 'Seleccione una categoría válida.';
+
+        return $mensajes;
+    }
+
+    protected function validateContent()
+    {
+        return 'required|text|max:500|min:1';
+    }
+
+    protected function mensajesContent()
+    {
+        $mensajes = array();
+        $mensajes["content.required"] = 'Introduzca un contenido válido.';
+        $mensajes["content.text"] = 'Introduzca un contenido válido.';
+        $mensajes["content.max"] = 'Supera el máximo de 500 carácteres.';
+        $mensajes["content.min"] = 'No supera el mínimo de 1 carácter.';
+
+        return $mensajes;
     }
 }

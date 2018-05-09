@@ -7,17 +7,20 @@ use Illuminate\Database\Eloquent\Model;
 class Post extends Model
 {
     /**
-     * @var array
+     * This method modify the field that route binding works with.
+     * By default Route Binding works with 'id' field, but in this
+     * case we've changed this value to 'slug'
+     *
+     * @return string The field that Route Binding works with.
      */
-    protected $table = 'posts';
-    protected $fillable = ['id', 'created_at', 'updated_at'];
-
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
-     */
-    public function user()
+    public function getRouteKeyName()
     {
-        // Relación [1 a n].
-        return $this->belongsTo(User::class);
+        return 'slug';
+    }
+    function isDraft(){
+        return true;
+    }
+    public static function scopePublished($query) {
+        return $query->where('status', 'published');
     }
 }

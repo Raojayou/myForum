@@ -18,8 +18,8 @@ class CreateUsersTable extends Migration
             $table->string('name');
             $table->string('email')->unique();
             $table->string('nick')->unique();
-//            $table->string('slug')->unique();
-//            $table->string('avatar')->nullable();
+            $table->string('slug')->unique();
+            $table->string('avatar');
             //$table->enum('role', ['admin', 'moderator', 'user']);
             $table->string('password');
             $table->rememberToken();
