@@ -6,11 +6,11 @@ use Illuminate\Database\Eloquent\Model;
 
 class Topic extends Model
 {
-//    /**
-//     * @var array
-//     */
-//    protected $table = 'topics';
-//    protected $fillable = ['id', 'title', 'category', 'content', 'created_at', 'updated_at'];
+    /**
+     * @var array
+     */
+    protected $table = 'topics';
+    protected $fillable = ['id','user_id','slug', 'title', 'category', 'content', 'created_at', 'updated_at'];
 
     /**
      * This method modify the field that route binding works with.
@@ -24,10 +24,10 @@ class Topic extends Model
         return 'slug';
     }
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function hasUser()
+    public function user()
     {
-        return $this->hasOne(User::class);
+        return $this->belongsTo(User::class);
     }
 }

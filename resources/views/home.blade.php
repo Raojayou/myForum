@@ -13,7 +13,7 @@
         <p>
             Este es el lugar adecuado para discutir ideas, críticas, solicitudes de funciones y todas las ideas con
             respecto a nuestro sitio web. Siga las reglas del foro y siempre consulte las preguntas frecuentes antes
-            de publicar para evitar duplicar publicaciones
+            de publicar para evitar duplicar publicaciones.
         </p>
 
         <table class="table forum table-striped">
@@ -62,11 +62,14 @@
             <tr>
                 <td class="text-center"><i class="fa fa-edit fa-2x text-success"></i></td>
                 <td colspan="4" class="center">
-                    <h5><a href="{{ url('/topics/{topic}') }}">Mostrar Temas</a><br>
+                    <h5><a href="{{ url('/') }}/topics ">Mostrar Temas</a><br>
 
                         <small>
                             Haga click para ser redireccionado a la página de mostrar temas.
                         </small>
+                    </h5>
+
+                    <h5><a href="{{ url('/data/load') }}">Cargar datos</a><br>
                     </h5>
 
                     @auth()
@@ -82,8 +85,4 @@
             </tbody>
         </table>
     </div>
-
-    {{--<div class="pagination">--}}
-    {{--{{ $topics->links('pagination::bootstrap-4') }}--}}
-    {{--</div>--}}
 @endsection

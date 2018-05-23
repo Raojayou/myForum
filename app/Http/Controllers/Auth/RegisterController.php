@@ -68,6 +68,8 @@ class RegisterController extends Controller
             'name' => $data['name'],
             'email' => $data['email'],
             'nick' => $data['nick'],
+            'slug' => str_slug($data['name']),
+            'avatar' => 'https://picsum.photos/200/200',
             'password' => Hash::make($data['password']),
         ]);
     }

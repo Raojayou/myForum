@@ -2,7 +2,7 @@
 
 namespace App;
 
-use Illuminate\Database\Eloquent\Eloquent;
+use Illuminate\Database\Eloquent\Model as Eloquent;
 
 class Model extends Eloquent
 {

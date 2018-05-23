@@ -60,92 +60,32 @@
 /******/ 	__webpack_require__.p = "/";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 47);
+/******/ 	return __webpack_require__(__webpack_require__.s = 49);
 /******/ })
 /************************************************************************/
 /******/ ({
 
-/***/ 47:
+/***/ 49:
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(48);
+module.exports = __webpack_require__(50);
 
 
 /***/ }),
 
-/***/ 48:
+/***/ 50:
 /***/ (function(module, exports) {
 
 $(function () {
-    $("#title").on("change", validateTitleAjax);
-    $("#category").on("change", validateCategoryAjax);
-    $("#content").on("change", validateContentAjax);
-    $('#enviar').on("click");
+    $('#enviar').on("click", loadData);
 });
 
-function validate(field) {
-    var data = {};
-    data[field] = $("#" + field).val();
-
-    axios.post('/topics/validate', data).then(function (response) {
-        gestionarErrores($("#" + field), response.data[field]);
+function loadData() {
+    axios.get('/data/loadAjax', {}).then(function (response) {
+        console.log(response);
     }).catch(function (error) {
         console.log(error);
     });
-}
-
-function validateTitleAjax() {
-    validate("title");
-}
-
-function validateCategoryAjax() {
-    validate("category");
-}
-
-function validateContentAjax() {
-    validate("content");
-}
-
-function gestionarErrores(input, errores) {
-    var hayErrores = false;
-    var divErrores = input.next();
-
-    divErrores.html("");
-
-    input.removeClass("is-valid is-invalid");
-
-    if (errores.length === 0) {
-        input.addClass("is-valid");
-    } else {
-        hayErrores = true;
-        input.addClass("is-invalid");
-        var _iteratorNormalCompletion = true;
-        var _didIteratorError = false;
-        var _iteratorError = undefined;
-
-        try {
-            for (var _iterator = errores[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
-                var error = _step.value;
-
-                divErrores.append("<div>" + error + "</div>");
-            }
-        } catch (err) {
-            _didIteratorError = true;
-            _iteratorError = err;
-        } finally {
-            try {
-                if (!_iteratorNormalCompletion && _iterator.return) {
-                    _iterator.return();
-                }
-            } finally {
-                if (_didIteratorError) {
-                    throw _iteratorError;
-                }
-            }
-        }
-    }
-    input.parent().next().remove();
-    return hayErrores;
 }
 
 /***/ })

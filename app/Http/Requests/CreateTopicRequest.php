@@ -84,14 +84,14 @@ class CreateTopicRequest extends FormRequest
 
     protected function validateContent()
     {
-        return 'required|text|max:500|min:1';
+        return 'required|string|max:500|min:1';
     }
 
     protected function mensajesContent()
     {
         $mensajes = array();
         $mensajes["content.required"] = 'Introduzca un contenido válido.';
-        $mensajes["content.text"] = 'Introduzca un contenido válido.';
+        $mensajes["content.string"] = 'Introduzca un contenido válido.';
         $mensajes["content.max"] = 'Supera el máximo de 500 carácteres.';
         $mensajes["content.min"] = 'No supera el mínimo de 1 carácter.';
 

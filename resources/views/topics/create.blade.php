@@ -18,16 +18,15 @@
                                 <form id="crearTema" action="{{ url('/') }}/topics/create" method="POST"
                                       class="form-horizontal">
                                     {{ csrf_field() }}
-                                    <div id="validateTitle">
+
+
                                         <div class="form-group{{ $errors->has('title') ? ' has-error' : '' }}">
                                             <label for="title"
                                                    class="col-md-4 control-label">{{ __('Título del Tema') }}</label>
                                             <div class="col-md-9">
                                                 <input id="title" type="text" class="form-control" name="title"
                                                        value="{{ old('title') }}" autofocus>
-
-                                                <div id="errorTitle" class="text-danger"></div>
-
+                                                <div>
                                                 @if($errors->has('title'))
                                                     @foreach($errors->get('title') as $message)
                                                         <div class="alert alert-danger" role="alert">
@@ -35,10 +34,10 @@
                                                         </div>
                                                     @endforeach
                                                 @endif
+                                                </div>
                                             </div>
-                                        </div>
 
-                                        <div id="validateCategory">
+                                        <div id="validateCategoryAjax">
 
                                             <div class="form-group{{ $errors->has('category') ? ' has-error' : '' }}">
                                                 <label for="type"
@@ -62,7 +61,7 @@
                                                         <option value="Reporte de Errores">Reporte de Errores</option>
                                                     </select>
 
-                                                    <div id="errorCategory" class="text-danger"></div>
+                                                    <div id="errores" class="text-danger"></div>
 
                                                     @if($errors->has('category'))
                                                         @foreach($errors->get('category') as $message)
@@ -74,7 +73,7 @@
                                                 </div>
                                             </div>
 
-                                            <div id="validateContent">
+                                            <div id="validateContentAjax">
 
                                                 <div class="form-group{{ $errors->has('content') ? ' has-error' : '' }}">
                                                     <label for="content"
@@ -84,7 +83,7 @@
                                                       placeholder="Escribe lo que necesites..." name="content" rows="5"
                                                       autofocus></textarea>
 
-                                                        <div id="errorContent" class="text-danger"></div>
+                                                        <div id="errores" class="text-danger"></div>
 
                                                         @if($errors->has('content'))
                                                             @foreach($errors->get('content') as $message)

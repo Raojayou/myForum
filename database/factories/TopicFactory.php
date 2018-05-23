@@ -14,6 +14,6 @@ $factory->define(App\Topic::class, function (Faker $faker) {
         'title' => $title,
         'slug' => $slug,
         'category' => $faker->word,
-        'content' => $faker->realText(random_int(1, 500))
+        'content' => $faker->Text(random_int(1, 500))
     ];
 });

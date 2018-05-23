@@ -1,23 +1,13 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="container">
-        <div class="row">
-            <div class="card border-success mb-3 mx-auto" style="max-width: 18rem;">
-                <div class="card-header">
-                    <p class="title">{{ $topic['title'] }}</p>
+    @foreach($topics as $topic)
+        <div class="container">
+            <div class="row">
+                <div class="card border-dark mb-3" style="max-width: 18rem;">
+                    <div class="card-header text-center"><a href="/topics/{{ $topic['id'] }}">{{ $topic['title'] }}</a></div>
                 </div>
-
-                <div class="card-body">
-                    <p class="content">{{ $topic['content'] }}</p>
-                </div>
-
-                <div class="card-footer">
-                    <p class="category">{{ $topic['category'] }}</p>
-                </div>
-
-                <p class="created_at">{{ $topic->created_at->toFormattedDateString() }}</p>
             </div>
         </div>
-    </div>
+    @endforeach
 @endsection

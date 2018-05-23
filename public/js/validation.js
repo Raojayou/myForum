@@ -85,6 +85,7 @@ $(function () {
 });
 
 function validateName() {
+    var isValid = false;
     var regex = /^[a-zA-Z]+(([',. -][a-zA-Z ])?[a-zA-Z]*)*$/;
     var inputName = $("#name");
     var name = inputName.val();
@@ -99,26 +100,32 @@ function validateName() {
 
         $('#errorName').removeClass('is-invalid');
         $('#errorName').html('');
+        isValid = true;
     }
+    return isValid;
 }
 
 function validateEmail() {
+    var isValid = false;
     var regex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     var inputEmail = $("#email");
     var email = inputEmail.val();
 
-    if (email.match(regex) || email === "") {
+    if (email.match(regex)) {
         $('#email').removeClass('is-invalid');
         $('#email').addClass('is-valid');
         $('#errorEmail').html('');
+        isValid = true;
     } else {
         $('#email').removeClass('is-valid');
         $('#email').addClass('is-invalid');
         $('#errorEmail').html("El email no es correcto.").addClass('is-invalid');
     }
+    return isValid;
 }
 
 function validateNick() {
+    var isValid = false;
     var regex = /^[a-zA-Z]\w*$/;
     var inputNick = $("#nick");
     var nick = inputNick.val();
@@ -133,11 +140,14 @@ function validateNick() {
 
         $('#errorNick').removeClass('is-invalid');
         $('#errorNick').html('');
+        isValid = true;
     }
+    return isValid;
 }
 
 function validatePassword() {
-    var regex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,}$/;
+    var isValid = false;
+    var regex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{5,}$/;
     var inputPassword = $("#password");
     var password = inputPassword.val();
 
@@ -151,7 +161,9 @@ function validatePassword() {
 
         $('#errorPassword').removeClass('is-invalid');
         $('#errorPassword').html('');
+        isValid = true;
     }
+    return isValid;
 }
 
 function validateAll(e) {

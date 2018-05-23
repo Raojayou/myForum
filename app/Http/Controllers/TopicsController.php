@@ -7,6 +7,7 @@ use App\Http\Requests\CreateTopicRequest;
 use App\Topic;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 /**
  * Class TopicsController
@@ -36,9 +37,18 @@ class TopicsController extends Controller
      * @param Topic $topic
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function show(Topic $topic)
+    public function show(Topic $topics)
     {
-        return view('topics.show', ['topic' => $topic,]);
+        $topics = Topic::orderBy('created_at','desc')->paginate(10);
+
+        return view('topics.show', ['topics' => $topics]);
+    }
+
+    public function details($id)
+    {
+        $topics = Topic::find($id)->paginate(10);
+
+        return view('topics.index', ['topics' => $topics]);
     }
 
     /**
@@ -61,10 +71,12 @@ class TopicsController extends Controller
     public function store(CreateTopicRequest $request)
     {
         Topic::create([
+            'user_id' => Auth::user()->id,
             'title' => $request->input('title'),
             'slug' => str_slug(\request('title')),
             'category' => $request->input('category'),
             'content' => $request->input('content'),
+
         ]);
 
         return redirect('/');
@@ -79,5 +91,16 @@ class TopicsController extends Controller
     {
         //Obtenemos todos los valores y devolvemos un array vacío.
         return array();
+    }
+
+    public function loadData()
+    {
+
+        return view('dataAjax');
+    }
+
+    public function loadDataAjax()
+    {
+        return Topic::All();
     }
 }

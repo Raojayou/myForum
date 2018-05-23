@@ -13,7 +13,7 @@
                     <div class="card-header">{{ __('Registro de Usuario') }}</div>
 
                     <div class="card-body">
-                        <form method="POST" action="{{ route('register') }}">
+                        <form id="formulario" method="POST" action="{{ route('register') }}">
                             @csrf
                             <div id="validateName">
                                 <div class="form-group row">
@@ -34,7 +34,6 @@
                                     </span>
                                         @endif
                                     </div>
-
                                 </div>
 
                                 <div id="validateNick">
@@ -54,7 +53,6 @@
                                     </span>
                                             @endif
                                         </div>
-
                                     </div>
 
                                     <div id="validateEmail">

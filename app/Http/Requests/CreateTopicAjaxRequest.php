@@ -6,7 +6,7 @@ use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Validation\ValidationException;
 
-class CreateTopicAjaxRequest extends FormRequest
+class CreateTopicAjaxRequest extends CreateTopicRequest
 {
     /**
      * Get the validation rules that apply to the request.
