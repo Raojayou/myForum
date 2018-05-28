@@ -131,7 +131,7 @@ En la parte **izquierda superior** de la página, encontramos el **logo** del pr
 
 **Vista de un tema en particular**
 
-* Aquí dispondrá de toda la información acerca del museo al que ha accedido el usuario.
+* Aquí dispondrá de toda la información acerca del tema al que ha accedido el usuario.
 
 **Vista de un usuario en particular**
 
