@@ -1,59 +1,167 @@
-<p align="center"><img src="https://laravel.com/assets/img/components/logo-laravel.svg"></p>
+# MyForum
+Proyecto basado en un foro realizado en Laravel 5.6 y Bootstrap v4.0.
 
-<p align="center">
-<a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/d/total.svg" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/v/stable.svg" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/license.svg" alt="License"></a>
-</p>
+**Instalación**
 
-## About Laravel
+Para poder usar la aplicacion es necesario instalar PHP, Composer , Vagrant , Virtualbox y Node.js.
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel attempts to take the pain out of development by easing common tasks used in the majority of web projects, such as:
+**PHP**
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+Link para instalar _PHP:_ http://php.net/manual/es/install.windows.php
 
-Laravel is accessible, yet powerful, providing tools needed for large, robust applications.
+**Composer**
 
-## Learning Laravel
+Link para instalar _Composer:_ https://getcomposer.org/download/
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of any modern web application framework, making it a breeze to get started learning the framework.
+**Vagrant**
 
-If you're not in the mood to read, [Laracasts](https://laracasts.com) contains over 1100 video tutorials on a range of topics including Laravel, modern PHP, unit testing, JavaScript, and more. Boost the skill level of yourself and your entire team by digging into our comprehensive video library.
+Link para instalar _Vagrant:_ https://www.vagrantup.com/downloads.html
 
-## Laravel Sponsors
+**VirtualBox**
 
-We would like to extend our thanks to the following sponsors for helping fund on-going Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell):
+Link para instalar _VirtualBox:_ https://www.virtualbox.org/wiki/Downloads
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[British Software Development](https://www.britishsoftware.co)**
-- [Fragrantica](https://www.fragrantica.com)
-- [SOFTonSOFA](https://softonsofa.com/)
-- [User10](https://user10.com)
-- [Soumettre.fr](https://soumettre.fr/)
-- [CodeBrisk](https://codebrisk.com)
-- [1Forge](https://1forge.com)
-- [TECPRESSO](https://tecpresso.co.jp/)
-- [Pulse Storm](http://www.pulsestorm.net/)
-- [Runtime Converter](http://runtimeconverter.com/)
-- [WebL'Agence](https://weblagence.com/)
+**Node.js**
 
-## Contributing
+Link para instalar _npm:_ https://nodejs.org/es/download/package-manager/
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+**Homestead**
 
-## Security Vulnerabilities
+Link para instalar _homestead:_ https://laravel.com/docs/5.6/homestead
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+**Tutorial paso a paso de la instalación por si no ha quedado claro:**
 
-## License
+https://medium.com/eaimanshoshi/i-am-going-to-write-down-step-by-step-procedure-to-setup-homestead-for-laravel-5-2-17491a423aa
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+Una vez que se hayan completado todos los pasos, descargamos/clonamos el proyecto desde github en la carpeta que haya usted determinado para los proyectos Homestead.
+
+_git clone https://github.com/Raojayou/myForum.git_
+
+**Configuración**
+
+Una vez descargado el proyecto, pasamos a la configuración, todos los pasos pueden ser modificados por el usuario.
+
+**Homestead.yaml**
+
+En primer lugar modificaremos el archivo Homestead.yaml ubicado en la carpeta Homestead.
+
+![alt text](//)
+
+**Hosts**
+
+En segundo lugar modificaremos el archivo hosts con permisos de administrador.
+
+En _Windows_ la ruta sería: C:\Windows\System32\drivers\etc
+
+En _Linux_ se encuentra en: etc/hosts
+
+![alt text](//)
+
+Una vez realizados todos estos pasos, encendemos la máquina virtual, al añadir una base de datos, será necesario utilizar el siguiente comando en la carpeta de _Homestead:_
+
+_vagrant up --provision_
+
+El resto de veces que queramos iniciar vagrant, será necesario utilizar sólo este comando:
+
+_vagrant up_
+
+**.env**
+
+Una vez realizado estos pasos, nos faltará configurar el archivo _.env_ del proyecto **MyForum.** 
+
+Para ello podemos renombramos el archivo _.env.example_ o creamos un archivo _.env_, en cualquier caso, la configuración deberá ser así:
+
+![alt text](//)
+
+Para generar 'APP_KEY, deberá utilizar el siguiente comando:'
+
+_php artisan key:generate_
+
+**Base de datos**
+
+Para la configuración de la base de datos, utilizará los datos del archivo _.env._
+
+Accedemos a _Database -> New -> Data Source -> MySQL_
+
+![alt text](//)
+
+**Instalación de los componentes de MyForum**
+
+Para instalar los componentes necesarios para que funcione correctamente el proyecto, se deberán utilizar los siguientes comandos:
+
+_composer install_
+
+_npm run dev_
+
+Una vez que estemos conectados a la _Base de Datos_ y todos los componentes estén ya instalados, el usuario podrá utilizar el siguiente comando en el proyecto, este comando creará datos usando factorías, con información generada aleatoriamente con **$faker**.
+
+_php artisan migrate:refresh --seed_
+
+**Manual de uso de la aplicación**
+
+Funcionalidades de la aplicación:
+
+El usuario dispondrá de diferentes opciones dependiendo si está logeado o no.
+
+**Usuario NO logeado**
+
+En el navbar dispondrá de 2 opciones:
+
+**Login:** nos permite logearnos en la página si ya disponemos de una cuenta.
+
+**Registro** nos permite registrar un nuevo usuario.
+
+El contenido principal de la página se divide en _tres secciones_:
+
+* La parte superior posee una barra de navegación.
+
+* En la parte central de la página aparecerán las siguientes opciones:
+    * Mostrar Temas.
+    * Cargar Datos.
+* Si el usuario hace click en mostrar temas le aparecerá una lista de los títulos de todos los temas creados y si le hace click lo redireccionará a una página de vista en detalle de dicho tema.
+
+* Los temas poseen la siguiente información:
+
+    * Título del tema.
+    * Categoría del tema.
+    * Contenido del tema.
+    * Fecha de creación del tema.
+    
+En la parte **izquierda superior** de la página, encontramos el **logo** del proyecto y el texto **MyForum**, al pulsarlos, nos redirecciona a la página principal.
+
+**Vista de un tema en particular**
+
+* Aquí dispondrá de toda la información acerca del museo al que ha accedido el usuario.
+
+**Vista de un usuario en particular**
+
+* En la parte superior encontrará el avatar del usuario e información detallada.
+
+* Podrá ver todos los temas que ha creado dicho usuario.
+
+**Usuario logeado**
+
+Al logearse, el usuario tendrá funciones y permisos que no tiene al no estar logeado, a continuación les explicaré las nuevas funcionalidades, las anteriores se mantendrán igual.
+
+* En la parte central, debajo de discusión general aparece las opción:
+
+    * Añadir Tema. Aquí el usuario podrá añadir un nuevo tema.
+    
+    
+* En la parte superior derecha si hace click en el nombre del usuario logeado, aparecerá un dropdown:
+    
+    * Perfil: Accedemos a una nueva sección, aquí podremos ver todos los datos del usuario.
+            
+       * Cuenta: Nos permite editar los datos de la cuenta del usuario (Nombre y Email).
+       * Contraseña: Nos permite editar la contraseña del usuario (Contraseña Actual, Contraseña Nueva y Repetir Contraseña).
+       * Avatar: Nos muestra el avatar del usuario.
+       * Borrar Usuario: Nos permite borrar el usuario (No hay vuelta atrás al borrarlo).
+            
+    * Logout: Desconectamos la cuenta.
+
+**Componentes utilizados en el proyecto**
+
+//
+
+_Componentes básicos para el funcionamiento de Bootstrap v4.0._
+
