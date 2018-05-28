@@ -61,25 +61,36 @@
             <tbody>
             <tr>
                 <td class="text-center"><i class="fa fa-edit fa-2x text-success"></i></td>
+
                 <td colspan="4" class="center">
-                    <h5><a href="{{ url('/') }}/topics ">Mostrar Temas</a><br>
+                    <h5><a href="{{ url('/') }}/topics">Mostrar Temas</a><br>
 
                         <small>
                             Haga click para ser redireccionado a la página de mostrar temas.
                         </small>
                     </h5>
-
-                    <h5><a href="{{ url('/data/load') }}">Cargar datos</a><br>
-                    </h5>
-
-                    @auth()
+                </td>
+            @auth()
+                <tr>
+                    <td class="text-center"><i class="fa fa-plus fa-2x text-secondary"></i></td>
+                    <td>
                         <h5><a href="{{ url('/topics/create') }}">Añadir Tema</a><br>
-
                             <small>
                                 Haga click para ser redireccionado a la página de añadir tema.
                             </small>
                         </h5>
-                    @endauth
+                    </td>
+                </tr>
+            @endauth
+
+            <tr>
+                <td class="text-center"><i class="fa fa-spinner fa-2x text-info"></i></td>
+                <td>
+                    <h5><a href="{{ url('/data/dataAjax') }}">Cargar datos</a><br>
+                        <small>
+                            Haga click para ser redireccionado a la página de carga de datos.
+                        </small>
+                    </h5>
                 </td>
             </tr>
             </tbody>

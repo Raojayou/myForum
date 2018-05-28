@@ -80,8 +80,12 @@ $(function () {
     $("#title").on("change", validateTitleAjax);
     $("#category").on("change", validateCategoryAjax);
     $("#content").on("change", validateContentAjax);
-    $('#enviar').on("click");
+    $('#load').on("click", loadDataAjax);
+    $('#loadOne').on("click", loadDataAjaxOne);
+    $('#enviar').on("click", validateAll);
 });
+
+var cont = 0;
 
 function validate(field) {
     var data = {};
@@ -108,7 +112,7 @@ function validateContentAjax() {
 
 function gestionarErrores(input, errores) {
     var hayErrores = false;
-    var divErrores = input.next();
+    var divErrores = input.next("div");
 
     divErrores.html("");
 
@@ -127,7 +131,7 @@ function gestionarErrores(input, errores) {
             for (var _iterator = errores[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
                 var error = _step.value;
 
-                divErrores.append("<div>" + error + "</div>");
+                divErrores.append("<div class='alert alert-danger' role='alert'>" + error + "</div>");
             }
         } catch (err) {
             _didIteratorError = true;
@@ -144,8 +148,101 @@ function gestionarErrores(input, errores) {
             }
         }
     }
-    input.parent().next().remove();
     return hayErrores;
+}
+// Función que carga todos los datos.
+function loadDataAjax() {
+
+    var resp = $("#topicList");
+
+    axios.get('/data/loadAjax', {}).then(function (response) {
+        showResponse(response, resp);
+    }).catch(function (error) {
+        console.log(error);
+    });
+}
+// Función que carga datos uno a uno y los muestra.
+function loadDataAjaxOne() {
+
+    var resp = $("#topicList");
+    axios.post('/data/loadAjaxOne', {
+        posicionInicial: cont,
+        numeroElementos: 1
+    }).then(function (response) {
+        showResponse(response, resp);
+        cont++;
+    }).catch(function (error) {
+        console.log(error);
+    });
+}
+
+function buildElement(element) {
+
+    var div = $("<div></div>");
+    div.addClass("card");
+
+    var divHeader = $('<div></div>');
+    divHeader.addClass("card-header");
+    var h2 = $("<h2></h2>");
+    var a = $("<a></a>");
+    var p = $("<p></p>");
+    var em = $("<em></em>");
+    var pContent = $("<p></p>");
+
+    h2.addClass("card-title");
+    p.addClass("card-subtitle");
+    pContent.addClass("card-body");
+
+    a.text(element.title);
+    p.text(element.category);
+    pContent.text(element.content);
+
+    h2.append(a);
+    divHeader.append(h2);
+    p.append(em);
+    divHeader.append(p);
+    div.append(divHeader);
+    div.append(pContent);
+
+    return div;
+}
+
+function showResponse(response, resp) {
+    var data = response.data;
+    for (var item in response.data) {
+        var element = data[item];
+        var div = buildElement(element);
+        resp.append(div);
+    }
+}
+
+function validateAll(e) {
+
+    e.preventDefault();
+    var button = $('button');
+    button.prop("disabled", true);
+
+    var tituloCorrecto = validateTitleAjax();
+    var categoriaCorrecta = validateCategoryAjax();
+    var contenidoCorrecto = validateContentAjax();
+
+    if (tituloCorrecto && categoriaCorrecta && contenidoCorrecto) {
+        $('#form').submit();
+    }
+
+    button.prop("disabled", false);
+}
+
+function showSpinner(input) {
+    if (input.parent().next().length === 0) {
+        var spin = $(".spinner").first().clone(true);
+        input.parent().after(spin);
+        spin.show();
+    }
+}
+
+function hideSpinner() {
+    $("#" + field).parent().next().remove();
 }
 
 /***/ })

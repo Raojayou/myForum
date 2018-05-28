@@ -24,10 +24,11 @@ Route::group(['middleware' => 'auth'], function () {
 });
 
 // Rutas al no estar logueado.
-Route::get('/topics', 'TopicsController@show');
-Route::get('/topics/{id}', 'TopicsController@details');
+Route::get('/topics', 'TopicsController@index');
+Route::get('/topics/{id}', 'TopicsController@show');
 
-Route::get('/data/load', 'TopicsController@loadData');
+Route::get('/data/dataAjax', 'TopicsController@loadData');
 Route::get('/data/loadAjax', 'TopicsController@loadDataAjax');
+Route::post('/data/loadAjaxOne', 'TopicsController@loadDataAjaxOne');
 
 Auth::routes();

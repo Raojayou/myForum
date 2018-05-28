@@ -2,16 +2,25 @@
 
 @section('content')
     @push('script-head')
-        <script src="{{ asset('js/loadData.js') }}" defer></script>
+        <script src="{{ asset('js/validationForm.js') }}" defer></script>
     @endpush
 
     <div class="container">
         <div class="row">
-            <button id="enviar" type="submit" class="btn btn-primary">
+            <button id="load" type="submit" class="btn btn-primary mx-auto">
                 {{ __('Cargar datos') }}
+            </button>
+
+            <button id="loadOne" type="submit" class="btn btn-primary ">
+                {{ __('Cargar uno a uno los datos') }}
             </button>
         </div>
 
-        <div id="response"></div>
+        <a href="{{ url('/data/dataAjax') }}">
+            {{ __('Recargar la página') }}
+        </a>
+
+
+        <div id="topicList"></div>
     </div>
 @endsection

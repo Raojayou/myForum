@@ -8,6 +8,7 @@ use App\Topic;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 /**
  * Class TopicsController
@@ -22,9 +23,6 @@ class TopicsController extends Controller
      */
     public function index()
     {
-        // Latest is only a query scope of 'orderBy':
-        // $topics = Topic::orderBy('created_at','asc')->paginate(10);
-        // On the contrary you would use 'oldest'
         $topics = Topic::orderBy('created_at', 'asc')->paginate(10);
         // Here we send the data through the PHP function 'compact'
         // See Documentation: http://php.net/manual/es/function.compact.php
@@ -39,16 +37,9 @@ class TopicsController extends Controller
      */
     public function show(Topic $topics)
     {
-        $topics = Topic::orderBy('created_at','desc')->paginate(10);
+        $topics = Topic::orderBy('created_at', 'desc')->paginate(10);
 
         return view('topics.show', ['topics' => $topics]);
-    }
-
-    public function details($id)
-    {
-        $topics = Topic::find($id)->paginate(10);
-
-        return view('topics.index', ['topics' => $topics]);
     }
 
     /**
@@ -95,12 +86,24 @@ class TopicsController extends Controller
 
     public function loadData()
     {
-
         return view('dataAjax');
     }
 
     public function loadDataAjax()
     {
-        return Topic::All();
+        $topics = Topic::all();
+
+        return $topics;
+    }
+
+    public function loadDataAjaxOne(Request $request)
+    {
+        $posicionInicial = $request->get("posicionInicial");
+        $numElementos = $request->get("numeroElementos");
+        $topics = DB::table("topics")
+            ->offset($posicionInicial)
+            ->limit($numElementos)
+            ->get();
+        return $topics;
     }
 }
