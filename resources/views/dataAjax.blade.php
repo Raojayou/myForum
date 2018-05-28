@@ -7,20 +7,19 @@
 
     <div class="container">
         <div class="row">
-            <button id="load" type="submit" class="btn btn-primary mx-auto">
+            <button id="load" type="submit" class="btn btn-success mx-2">
                 {{ __('Cargar datos') }}
             </button>
 
-            <button id="loadOne" type="submit" class="btn btn-primary ">
+            <a class="btn btn-info mx-auto" href="{{ url('/data/dataAjax') }}">
+                {{ __('Recargar la página') }}
+            </a>
+
+            <button id="loadOne" type="submit" class="btn btn-warning mx-5">
                 {{ __('Cargar uno a uno los datos') }}
             </button>
         </div>
-
-        <a href="{{ url('/data/dataAjax') }}">
-            {{ __('Recargar la página') }}
-        </a>
-
-
+        <br>
         <div id="topicList"></div>
     </div>
 @endsection
