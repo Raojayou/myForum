@@ -77,17 +77,36 @@ module.exports = __webpack_require__(48);
 /***/ (function(module, exports) {
 
 $(function () {
-    $("#title").on("change", validateTitleAjax);
-    $("#category").on("change", validateCategoryAjax);
-    $("#content").on("change", validateContentAjax);
-    $('#load').on("click", loadDataAjax);
-    $('#loadOne').on("click", loadDataAjaxOne);
     $('#enviar').on("click", validateAll);
+    $('#title').on("change", validateTitle);
+    $('#category').on("change", validateCategory);
+    $('#content').on("change", validateContent);
+    $('#load').on("click", loadData);
+    $('#loadOne').on("click", loadDataOne);
+    $('#loadView').on("click", loadViewOne);
 });
 
 var cont = 0;
 
-function validate(field) {
+function validateAll(e) {
+
+    e.preventDefault();
+    var button = $('button');
+    button.prop("disabled", true);
+
+    var tituloCorrecto = validateTitle();
+    var categoriaCorrecta = validateCategory();
+    var contenidoCorrecto = validateContent();
+
+    if (tituloCorrecto && categoriaCorrecta && contenidoCorrecto) {
+        $('#form').submit();
+    }
+
+    button.prop("disabled", false);
+}
+
+function validar(field) {
+
     var data = {};
     data[field] = $("#" + field).val();
 
@@ -98,24 +117,22 @@ function validate(field) {
     });
 }
 
-function validateTitleAjax() {
-    validate("title");
+function validateTitle() {
+    validar("title");
 }
 
-function validateCategoryAjax() {
-    validate("category");
+function validateCategory() {
+    validar("category");
 }
 
-function validateContentAjax() {
-    validate("content");
+function validateContent() {
+    validar("content");
 }
 
 function gestionarErrores(input, errores) {
     var hayErrores = false;
     var divErrores = input.next("div");
-
     divErrores.html("");
-
     input.removeClass("is-valid is-invalid");
 
     if (errores.length === 0) {
@@ -131,7 +148,7 @@ function gestionarErrores(input, errores) {
             for (var _iterator = errores[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
                 var error = _step.value;
 
-                divErrores.append("<div class='alert alert-danger' role='alert'>" + error + "</div>");
+                divErrores.append('<div class="alert alert-danger" role="alert">' + error + '</div>');
             }
         } catch (err) {
             _didIteratorError = true;
@@ -150,8 +167,20 @@ function gestionarErrores(input, errores) {
     }
     return hayErrores;
 }
-// Función que carga todos los datos.
-function loadDataAjax() {
+
+function showSpinner(input) {
+    if (input.parent().next().length === 0) {
+        var spin = $(".spinner").first().clone(true);
+        input.parent().after(spin);
+        spin.show();
+    }
+}
+
+function hideSpinner() {
+    $("#" + campo).parent().next().remove();
+}
+
+function loadData() {
 
     var resp = $("#topicList");
 
@@ -161,8 +190,8 @@ function loadDataAjax() {
         console.log(error);
     });
 }
-// Función que carga datos uno a uno y los muestra.
-function loadDataAjaxOne() {
+
+function loadDataOne() {
 
     var resp = $("#topicList");
     axios.post('/data/loadAjaxOne', {
@@ -176,7 +205,19 @@ function loadDataAjaxOne() {
     });
 }
 
-function buildElement(element) {
+function loadViewOne() {
+    axios.post('/topics/viewTopic', {
+        posicionInicial: cont,
+        numeroElementos: 1
+    }).then(function (response) {
+        $('#topicList').append(response.data);
+        cont++;
+    }).catch(function (error) {
+        console.log(error);
+    });
+}
+
+function buildElement(elemento) {
 
     var div = $("<div></div>");
     div.addClass("card");
@@ -186,16 +227,18 @@ function buildElement(element) {
     var h2 = $("<h2></h2>");
     var a = $("<a></a>");
     var p = $("<p></p>");
+    var p2 = $("<p></p>");
     var em = $("<em></em>");
     var pContent = $("<p></p>");
 
     h2.addClass("card-title");
     p.addClass("card-subtitle");
+    p2.addClass("card-subtitle");
     pContent.addClass("card-body");
 
-    a.text(element.title);
-    p.text(element.category);
-    pContent.text(element.content);
+    a.text(elemento.title);
+    p.text(elemento.category);
+    pContent.text(elemento.content);
 
     h2.append(a);
     divHeader.append(h2);
@@ -210,39 +253,10 @@ function buildElement(element) {
 function showResponse(response, resp) {
     var data = response.data;
     for (var item in response.data) {
-        var element = data[item];
-        var div = buildElement(element);
+        var elemento = data[item];
+        var div = buildElement(elemento);
         resp.append(div);
     }
-}
-
-function validateAll(e) {
-
-    e.preventDefault();
-    var button = $('button');
-    button.prop("disabled", true);
-
-    var tituloCorrecto = validateTitleAjax();
-    var categoriaCorrecta = validateCategoryAjax();
-    var contenidoCorrecto = validateContentAjax();
-
-    if (tituloCorrecto && categoriaCorrecta && contenidoCorrecto) {
-        $('#form').submit();
-    }
-
-    button.prop("disabled", false);
-}
-
-function showSpinner(input) {
-    if (input.parent().next().length === 0) {
-        var spin = $(".spinner").first().clone(true);
-        input.parent().after(spin);
-        spin.show();
-    }
-}
-
-function hideSpinner() {
-    $("#" + field).parent().next().remove();
 }
 
 /***/ })

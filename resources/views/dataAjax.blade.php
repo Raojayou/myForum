@@ -15,8 +15,12 @@
                 {{ __('Recargar la página') }}
             </a>
 
-            <button id="loadOne" type="submit" class="btn btn-warning mx-5">
+            <button id="loadOne" type="submit" class="btn btn-info mx-auto">
                 {{ __('Cargar uno a uno los datos') }}
+            </button>
+
+            <button id="loadView" type="submit" class="btn btn-warning mx-5">
+                {{ __('Cargar vista') }}
             </button>
         </div>
         <br>

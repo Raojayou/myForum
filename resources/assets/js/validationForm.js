@@ -1,15 +1,36 @@
 $(function () {
-    $("#title").on("change", validateTitleAjax);
-    $("#category").on("change", validateCategoryAjax);
-    $("#content").on("change", validateContentAjax);
-    $('#load').on("click", loadDataAjax);
-    $('#loadOne').on("click", loadDataAjaxOne);
     $('#enviar').on("click", validateAll);
+    $('#title').on("change", validateTitle);
+    $('#category').on("change", validateCategory);
+    $('#content').on("change", validateContent);
+    $('#load').on("click", loadData);
+    $('#loadOne').on("click", loadDataOne);
+    $('#loadView').on("click", loadViewOne)
+
 });
+
 
 let cont = 0;
 
-function validate(field) {
+function validateAll(e) {
+
+    e.preventDefault();
+    let button = $('button');
+    button.prop("disabled", true);
+
+    let tituloCorrecto = validateTitle();
+    let categoriaCorrecta = validateCategory();
+    let contenidoCorrecto = validateContent();
+
+    if (tituloCorrecto && categoriaCorrecta && contenidoCorrecto) {
+        $('#form').submit();
+    }
+
+    button.prop("disabled", false);
+}
+
+function validar(field) {
+
     let data = {};
     data[field] = $("#" + field).val();
 
@@ -19,26 +40,25 @@ function validate(field) {
     }).catch(function (error) {
         console.log(error);
     });
+
 }
 
-function validateTitleAjax() {
-    validate("title");
+function validateTitle() {
+    validar("title");
 }
 
-function validateCategoryAjax() {
-    validate("category");
+function validateCategory() {
+    validar("category");
 }
 
-function validateContentAjax() {
-    validate("content");
+function validateContent() {
+    validar("content");
 }
 
 function gestionarErrores(input, errores) {
     let hayErrores = false;
     let divErrores = input.next("div");
-
     divErrores.html("");
-
     input.removeClass("is-valid is-invalid");
 
     if (errores.length === 0) {
@@ -47,13 +67,25 @@ function gestionarErrores(input, errores) {
         hayErrores = true;
         input.addClass("is-invalid");
         for (let error of errores) {
-            divErrores.append("<div class='alert alert-danger' role='alert'>" + error + "</div>");
+            divErrores.append('<div class="alert alert-danger" role="alert">' + error + '</div>');
         }
     }
     return hayErrores;
 }
-// Función que carga todos los datos.
-function loadDataAjax() {
+
+function showSpinner(input) {
+    if (input.parent().next().length === 0) {
+        let spin = $(".spinner").first().clone(true);
+        input.parent().after(spin);
+        spin.show();
+    }
+}
+
+function hideSpinner() {
+    $("#" + campo).parent().next().remove()
+}
+
+function loadData() {
 
     let resp = $("#topicList");
 
@@ -64,8 +96,8 @@ function loadDataAjax() {
         console.log(error);
     });
 }
-// Función que carga datos uno a uno y los muestra.
-function loadDataAjaxOne() {
+
+function loadDataOne() {
 
     let resp = $("#topicList");
     axios.post('/data/loadAjaxOne',
@@ -81,7 +113,21 @@ function loadDataAjaxOne() {
     });
 }
 
-function buildElement(element) {
+function loadViewOne() {
+    axios.post('/topics/viewTopic',
+        {
+            posicionInicial: cont,
+            numeroElementos: 1
+        }
+    ).then(function (response) {
+        $('#topicList').append(response.data);
+        cont++;
+    }).catch(function (error) {
+        console.log(error);
+    });
+}
+
+function buildElement(elemento) {
 
     let div = $("<div></div>");
     div.addClass("card");
@@ -98,9 +144,9 @@ function buildElement(element) {
     p.addClass("card-subtitle");
     pContent.addClass("card-body");
 
-    a.text(element.title);
-    p.text(element.category);
-    pContent.text(element.content);
+    a.text(elemento.title);
+    p.text(elemento.category);
+    pContent.text(elemento.content);
 
     h2.append(a);
     divHeader.append(h2);
@@ -115,37 +161,8 @@ function buildElement(element) {
 function showResponse(response, resp) {
     let data = response.data;
     for (let item in response.data) {
-        let element = data[item];
-        let div = buildElement(element);
+        let elemento = data[item];
+        let div = buildElement(elemento);
         resp.append(div);
     }
-}
-
-function validateAll(e) {
-
-    e.preventDefault();
-    let button = $('button');
-    button.prop("disabled", true);
-
-    let tituloCorrecto = validateTitleAjax();
-    let categoriaCorrecta = validateCategoryAjax();
-    let contenidoCorrecto = validateContentAjax();
-
-    if (tituloCorrecto && categoriaCorrecta && contenidoCorrecto) {
-        $('#form').submit();
-    }
-
-    button.prop("disabled", false);
-}
-
-function showSpinner(input) {
-    if (input.parent().next().length === 0) {
-        let spin = $(".spinner").first().clone(true);
-        input.parent().after(spin);
-        spin.show();
-    }
-}
-
-function hideSpinner() {
-    $("#" + field).parent().next().remove()
 }

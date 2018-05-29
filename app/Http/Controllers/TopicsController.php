@@ -32,14 +32,14 @@ class TopicsController extends Controller
     /**
      * Página de tema única.
      * Route binding
-     * @param Topic $topic
+     * @param $id
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function show(Topic $topics)
+    public function show($id)
     {
-        $topics = Topic::orderBy('created_at', 'desc')->paginate(10);
+        $topic = Topic::where('id', $id)->first();
 
-        return view('topics.show', ['topics' => $topics]);
+        return view('topics.show', ['topic' => $topic]);
     }
 
     /**
@@ -105,5 +105,18 @@ class TopicsController extends Controller
             ->limit($numElementos)
             ->get();
         return $topics;
+    }
+
+    public function loadView(Request $request)
+    {
+        $posicionInicial = $request->get("posicionInicial");
+        $numElementos = $request->get("numeroElementos");
+        $topics = DB::table("topics")
+            ->offset($posicionInicial)
+            ->limit($numElementos)
+            ->get();
+
+        $view = view('topics.viewTopic', ['topics' => $topics]);
+        return $view;
     }
 }

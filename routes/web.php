@@ -26,6 +26,7 @@ Route::group(['middleware' => 'auth'], function () {
 // Rutas al no estar logueado.
 Route::get('/topics', 'TopicsController@index');
 Route::get('/topics/{id}', 'TopicsController@show');
+Route::post('/topics/viewTopic','TopicsController@loadView');
 
 Route::get('/data/dataAjax', 'TopicsController@loadData');
 Route::get('/data/loadAjax', 'TopicsController@loadDataAjax');
