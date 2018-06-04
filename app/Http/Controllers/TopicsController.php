@@ -23,7 +23,7 @@ class TopicsController extends Controller
      */
     public function index()
     {
-        $topics = Topic::orderBy('created_at', 'asc')->paginate(10);
+        $topics = Topic::orderBy('created_at', 'asc')->paginate(4);
         // Here we send the data through the PHP function 'compact'
         // See Documentation: http://php.net/manual/es/function.compact.php
         return view('topics.index', compact('topics'));
@@ -71,6 +71,18 @@ class TopicsController extends Controller
         ]);
 
         return redirect('/');
+    }
+
+    /**
+     * Función para borrar el tema creado.
+     * @return int
+     */
+    public function destroy()
+    {
+        $id = $_REQUEST['id'];
+        Topic::destroy($id);
+
+        return 1;
     }
 
     /**

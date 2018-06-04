@@ -5,10 +5,9 @@ $(function () {
     $('#content').on("change", validateContent);
     $('#load').on("click", loadData);
     $('#loadOne').on("click", loadDataOne);
-    $('#loadView').on("click", loadViewOne)
+    $('#loadView').on("click", loadViewOne);
 
 });
-
 
 let cont = 0;
 
@@ -29,7 +28,7 @@ function validateAll(e) {
     button.prop("disabled", false);
 }
 
-function validar(field) {
+function validate(field) {
 
     let data = {};
     data[field] = $("#" + field).val();
@@ -44,15 +43,15 @@ function validar(field) {
 }
 
 function validateTitle() {
-    validar("title");
+    validate("title");
 }
 
 function validateCategory() {
-    validar("category");
+    validate("category");
 }
 
 function validateContent() {
-    validar("content");
+    validate("content");
 }
 
 function gestionarErrores(input, errores) {

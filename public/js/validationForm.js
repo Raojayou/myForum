@@ -105,7 +105,7 @@ function validateAll(e) {
     button.prop("disabled", false);
 }
 
-function validar(field) {
+function validate(field) {
 
     var data = {};
     data[field] = $("#" + field).val();
@@ -118,15 +118,15 @@ function validar(field) {
 }
 
 function validateTitle() {
-    validar("title");
+    validate("title");
 }
 
 function validateCategory() {
-    validar("category");
+    validate("category");
 }
 
 function validateContent() {
-    validar("content");
+    validate("content");
 }
 
 function gestionarErrores(input, errores) {
@@ -227,13 +227,11 @@ function buildElement(elemento) {
     var h2 = $("<h2></h2>");
     var a = $("<a></a>");
     var p = $("<p></p>");
-    var p2 = $("<p></p>");
     var em = $("<em></em>");
     var pContent = $("<p></p>");
 
     h2.addClass("card-title");
     p.addClass("card-subtitle");
-    p2.addClass("card-subtitle");
     pContent.addClass("card-body");
 
     a.text(elemento.title);

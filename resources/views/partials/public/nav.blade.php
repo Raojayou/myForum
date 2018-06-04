@@ -27,17 +27,19 @@
                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                             {{ Auth::user()->nick }} <span class="caret"></span>
                         </a>
-                        {{--<i class="fa fa-user-circle"></i>--}}
+
 
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
 
-                            <a class="dropdown-item" href="{{ route('logout') }}">
-                                Perfil
+                            <a class="dropdown-item" href="{{ url('/') }}/user/profile">
+                                <i class="fas fa-user-circle"></i>
+                                {{ __('Perfil') }}
                             </a>
-                            {{--<i class="fa fa-sign-out"></i>--}}
+
                             <a class="dropdown-item" href="{{ route('logout') }}"
                                onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
+                                <i class="fa fa-sign-out"></i>
                                 {{ __('Logout') }}
                             </a>
 

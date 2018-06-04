@@ -4,7 +4,7 @@
     @foreach($topics as $topic)
         <div class="container">
             <div class="row">
-                <div class="col-md-8 col-md-offset-2">
+                <div class="mx-auto">
                     <div class="panel panel-default">
                         <div class="card" style="width: 35rem;">
                             <div class="card-body">
@@ -16,4 +16,9 @@
             </div>
         </div>
     @endforeach
+    <div>
+        <ul class="pagination justify-content-center">
+            {{ $topics->links() }}
+        </ul>
+    </div>
 @endsection

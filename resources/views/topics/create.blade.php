@@ -1,11 +1,10 @@
 @extends('layouts.app')
 
+@push('script-head')
+    <script src="{{ asset('js/validationForm.js') }}" defer></script>
+@endpush
+
 @section('content')
-
-    @push('script-head')
-        <script src="{{ asset('js/validationForm.js') }}" defer></script>
-    @endpush
-
     <div class="container">
         <div class="row">
             <div class="col-md-8 col-md-offset-2">

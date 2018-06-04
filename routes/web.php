@@ -17,9 +17,15 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 //Rutas al estar logueado.
 Route::group(['middleware' => 'auth'], function () {
+    Route::redirect('/profile', '/profile/account', 302);
+
     Route::get('/topics/create', 'TopicsController@create');
     Route::post('/topics/create', 'TopicsController@store');
     Route::post('/topics/validate', 'TopicsController@validateTopicAjax');
+    Route::post('/topics/destroy/{id}', 'TopicsController@destroy');
+
+    Route::get('/user/{user}', 'UsersController@show')->name("profile");
+
 
 });
 
@@ -27,6 +33,7 @@ Route::group(['middleware' => 'auth'], function () {
 Route::get('/topics', 'TopicsController@index');
 Route::get('/topics/{id}', 'TopicsController@show');
 Route::post('/topics/viewTopic','TopicsController@loadView');
+Route::post('/topics/viewAllTopics','TopicsController@loadView');
 
 Route::get('/data/dataAjax', 'TopicsController@loadData');
 Route::get('/data/loadAjax', 'TopicsController@loadDataAjax');

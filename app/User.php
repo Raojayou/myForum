@@ -28,10 +28,31 @@ class User extends Authenticatable
     ];
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
     public function hasTopic()
     {
-        return $this->belongsTo(User::class);
+        return $this->hasMany(User::class);
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
+    public function profile()
+    {
+        return $this->hasOne(User::class);
+    }
+
+    public function adminTopics()
+    {
+        switch ($this->role) {
+            case "admin":
+                $topics = Topic::latest()->paginate(20);
+                break;
+            case "author":
+                $topics = Topic::where('user_id', Auth::id())->paginate(20);
+                break;
+        }
+        return $topics;
     }
 }

@@ -79,7 +79,7 @@
 
     <div class="content">
         <div class="title m-b-md">
-            holi
+            Hola, bienvenid@.
         </div>
 
         <div class="links">

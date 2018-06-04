@@ -21,6 +21,9 @@
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link href="{{ asset('css/styles.css') }}" rel="stylesheet">
 
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css"
+          integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
+
     <!-- Icons -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
 
@@ -33,9 +36,10 @@
     @yield('content')
 </div>
 
-<footer>
+<footer class="footer navbar-default nav-footer">
     <div class="container">
-        <span class="text-muted">
+        <div class="navbar-header">
+            <span class="text-muted">
             <p>Encuentranos en nuestras redes sociales.
                 <a href="https://www.twitter.com/Raojayou1">
                     <i class="fa fa-twitter"></i></a>
@@ -46,9 +50,11 @@
                 <a href="https://www.youtube.com/user/Raojayou">
                     <i class="fa fa-youtube"></i></a>
             </p>
-        </span>
+            </span>
+        </div>
     </div>
 </footer>
+
 @stack('scripts')
 </body>
 </html>
