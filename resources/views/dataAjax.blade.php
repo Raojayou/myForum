@@ -1,10 +1,10 @@
 @extends('layouts.app')
 
-@section('content')
-    @push('script-head')
-        <script src="{{ asset('js/validationForm.js') }}" defer></script>
-    @endpush
+@push('script-head')
+    <script src="{{ asset('js/validationForm.js') }}" defer></script>
+@endpush
 
+@section('content')
     <div class="container">
         <div class="row">
             <button id="load" type="submit" class="btn btn-success mx-2">

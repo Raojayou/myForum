@@ -20,9 +20,12 @@ Route::group(['middleware' => 'auth'], function () {
     Route::redirect('/profile', '/profile/account', 302);
 
     Route::get('/topics/create', 'TopicsController@create');
+    Route::get('/topics/edit/{id}', 'TopicsController@edit');
+    Route::get('/topics/update', 'TopicsController@update');
+    Route::post('/topics/delete', 'TopicsController@delete');
+
     Route::post('/topics/create', 'TopicsController@store');
     Route::post('/topics/validate', 'TopicsController@validateTopicAjax');
-    Route::post('/topics/destroy/{id}', 'TopicsController@destroy');
 
     Route::get('/user/{user}', 'UsersController@show')->name("profile");
 

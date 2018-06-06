@@ -9,12 +9,12 @@
                         <img src="../images/user-icon.png" width="160px" height="160px" class="img-rounded img-responsive" alt="Imagen Plantilla">
                     </div>
                     <br><br>
-                    <label>Nick Registrado</label>
-                    <input type="text" class="form-control" placeholder="{{ $user['nick'] }}">
-                    <label>Nombre Registrado</label>
-                    <input type="text" class="form-control" placeholder="{{ $user['name'] }}">
-                    <label>Email Registrado</label>
-                    <input type="text" class="form-control" placeholder="{{ $user['email'] }}">
+                    <label>Cambiar Nick</label>
+                    <input type="text" class="form-control" placeholder="{{ Auth::user()->nick }}">
+                    <label>Cambiar Nombre</label>
+                    <input type="text" class="form-control" placeholder="{{ Auth::user()->name }}">
+                    <label>Cambiar Email</label>
+                    <input type="text" class="form-control" placeholder="{{ Auth::user()->email }}">
                     <br>
                     <a href="#" class="btn btn-success">Editar información</a>
                     <br><br>

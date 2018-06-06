@@ -53,6 +53,38 @@ class TopicsController extends Controller
     }
 
     /**
+     * Función para editar el tema creado.
+     * @param $id
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function edit($id)
+    {
+        $topics = Topic::all();
+
+        $topic = Topic::findOrFail($id);
+
+        return view('topics.edit', ['topics' => $topics, 'topic' => $topic]);
+    }
+
+    /**
+     * Función para actualizar el tema creado.
+     * @return int
+     */
+    public function update($id)
+    {
+
+    }
+
+    /**
+     * Función para borrar el tema creado.
+     * @return int
+     */
+    public function delete($id)
+    {
+
+    }
+
+    /**
      * Guarda en la base de datos la información facilitada para un nuevo tema.
      * Utiliza un Request para validar los datos.
      *
@@ -71,18 +103,6 @@ class TopicsController extends Controller
         ]);
 
         return redirect('/');
-    }
-
-    /**
-     * Función para borrar el tema creado.
-     * @return int
-     */
-    public function destroy()
-    {
-        $id = $_REQUEST['id'];
-        Topic::destroy($id);
-
-        return 1;
     }
 
     /**
