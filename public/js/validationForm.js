@@ -89,20 +89,28 @@ $(function () {
 var cont = 0;
 
 function validateAll(e) {
-
     e.preventDefault();
     var button = $('button');
     button.prop("disabled", true);
 
-    var tituloCorrecto = validateTitle();
-    var categoriaCorrecta = validateCategory();
-    var contenidoCorrecto = validateContent();
+    var data = {};
+    data["title"] = $("#title").val();
+    data["category"] = $("#category").val();
+    data["content"] = $("#content").val();
 
-    if (tituloCorrecto && categoriaCorrecta && contenidoCorrecto) {
-        $('#form').submit();
-    }
+    axios.post('/topics/validate', data).then(function (response) {
+        var tituloIncorrecto = gestionarErrores($("#title"), response.data["title"]);
+        var categoriaIncorrecto = gestionarErrores($("#category"), response.data["category"]);
+        var contenidoIncorrecto = gestionarErrores($("#content"), response.data["content"]);
 
-    button.prop("disabled", false);
+        if (!tituloIncorrecto && !categoriaIncorrecto && !contenidoIncorrecto) {
+            $('#form').submit();
+        }
+    }).catch(function (error) {
+        console.log(error);
+    }).then(function () {
+        $('button').prop("disabled", false);
+    });
 }
 
 function validate(field) {
@@ -135,7 +143,7 @@ function gestionarErrores(input, errores) {
     divErrores.html("");
     input.removeClass("is-valid is-invalid");
 
-    if (errores.length === 0) {
+    if (errores === undefined || errores.length === 0) {
         input.addClass("is-valid");
     } else {
         hayErrores = true;

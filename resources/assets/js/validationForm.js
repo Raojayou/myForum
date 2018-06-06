@@ -12,21 +12,31 @@ $(function () {
 let cont = 0;
 
 function validateAll(e) {
-
     e.preventDefault();
     let button = $('button');
     button.prop("disabled", true);
 
-    let tituloCorrecto = validateTitle();
-    let categoriaCorrecta = validateCategory();
-    let contenidoCorrecto = validateContent();
+    let data = {};
+    data["title"] = $("#title").val();
+    data["category"] = $("#category").val();
+    data["content"] = $("#content").val();
 
-    if (tituloCorrecto && categoriaCorrecta && contenidoCorrecto) {
-        $('#form').submit();
-    }
+    axios.post('/topics/validate', data
+    ).then(function (response) {
+        let tituloIncorrecto = gestionarErrores($("#title"), response.data["title"]);
+        let categoriaIncorrecto = gestionarErrores($("#category"), response.data["category"]);
+        let contenidoIncorrecto = gestionarErrores($("#content"), response.data["content"]);
 
-    button.prop("disabled", false);
+        if (!tituloIncorrecto && !categoriaIncorrecto && !contenidoIncorrecto) {
+            $('#form').submit();
+        }
+    }).catch(function (error) {
+        console.log(error);
+    }).then(function(){
+        $('button').prop("disabled", false);
+    });
 }
+
 
 function validate(field) {
 
@@ -39,7 +49,6 @@ function validate(field) {
     }).catch(function (error) {
         console.log(error);
     });
-
 }
 
 function validateTitle() {
@@ -60,7 +69,7 @@ function gestionarErrores(input, errores) {
     divErrores.html("");
     input.removeClass("is-valid is-invalid");
 
-    if (errores.length === 0) {
+    if (errores === undefined || errores.length === 0) {
         input.addClass("is-valid");
     } else {
         hayErrores = true;

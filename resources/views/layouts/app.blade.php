@@ -36,11 +36,9 @@
     @yield('content')
 </div>
 
-<footer class="footer navbar-default nav-footer">
+<footer>
     <div class="container">
-        <div class="navbar-header">
-            <span class="text-muted">
-            <p>Encuentranos en nuestras redes sociales.
+        <span class="text-muted">Encuentranos en nuestras redes sociales.
                 <a href="https://www.twitter.com/Raojayou1">
                     <i class="fa fa-twitter"></i></a>
                 <a href="https://www.facebook.com">
@@ -49,9 +47,7 @@
                     <i class="fa fa-instagram"></i></a>
                 <a href="https://www.youtube.com/user/Raojayou">
                     <i class="fa fa-youtube"></i></a>
-            </p>
-            </span>
-        </div>
+        </span>
     </div>
 </footer>
 
