@@ -14,7 +14,7 @@
                             <div class="panel-heading">{{ __('Edición de Tema') }}</div>
                             <hr>
                             <div class="panel-body">
-                                <form id="form" action="{{ url('/') }}/topics/edit" method="POST"
+                                <form id="form" action="{{ url('/') }}/topics/edit/{id}" method="POST"
                                       class="form-horizontal">
                                     {{ csrf_field() }}
 

@@ -5,9 +5,9 @@
         <div class="row justify-content-center">
             <div class="col-md-4 col-md-offset-4 col-sm-6 col-sm-offset-3">
                 <div class="card">
-                    <div class="card-header bg-success">{{ __('Login') }}</div>
+                    <div class="card-header bg-info">{{ __('Login') }}</div>
 
-                    <div class="card-body border-success">
+                    <div class="card-body border-info">
                         <form method="POST" action="{{ route('login') }}">
                             @csrf
 
@@ -58,7 +58,7 @@
                             <hr>
                             <div class="form-group row mb-0">
                                 <div class="mx-auto">
-                                    <button type="submit" class="btn btn-success">
+                                    <button type="submit" class="btn btn-info">
                                         {{ __('Login') }}
                                     </button>
                                 </div>

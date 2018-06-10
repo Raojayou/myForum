@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\CreateTopicAjaxRequest;
 use App\Http\Requests\CreateTopicRequest;
+use App\Http\Requests\UpdateTopicRequest;
 use App\Topic;
 
 use Illuminate\Http\Request;
@@ -59,29 +60,46 @@ class TopicsController extends Controller
      */
     public function edit($id)
     {
-        $topics = Topic::all();
 
-        $topic = Topic::findOrFail($id);
+//        $topic = Topic::where('id', $id)->first();
 
-        return view('topics.edit', ['topics' => $topics, 'topic' => $topic]);
+        return view('topics.edit',
+            array('topic' => Auth::user())
+
+        );
     }
 
     /**
      * Función para actualizar el tema creado.
-     * @return int
+     * @param UpdateTopicRequest $request
+     * @param $id
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
-    public function update($id)
+    public function update(CreateTopicRequest $request, $id)
     {
+        $topic = Topic::find($id);
 
+        $topic->update([
+            'title' => $request->input('title'),
+            'category' => $request->input('category'),
+            'content' => $request->input('content'),
+
+        ]);
+        return redirect("/edit");
     }
 
     /**
      * Función para borrar el tema creado.
-     * @return int
+     * @param $id
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
     public function delete($id)
     {
+        $user = Auth::user();
 
+        $topic = Topic::find($id)->delete();
+
+        return redirect()->route('profile', [$user])->with('deleted', 'Tema borrado con éxito.');
     }
 
     /**
@@ -118,7 +136,7 @@ class TopicsController extends Controller
 
     public function loadData()
     {
-        return view('dataAjax');
+        return view('data.dataAjax');
     }
 
     public function loadDataAjax()

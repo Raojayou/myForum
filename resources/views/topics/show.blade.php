@@ -9,7 +9,7 @@
                         <a class="btn btn-primary" data-toggle="collapse" href="#collapseExample" role="button"
                            aria-expanded="false"
                            aria-controls="collapseExample">
-                            Mostrar datos del tema
+                            <i class="fa fa-eye text-light"></i> Mostrar datos del tema
                         </a>
                     </p>
 

@@ -10,9 +10,9 @@
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <div class="card">
-                    <div class="card-header">{{ __('Registro de Usuario') }}</div>
+                    <div class="card-header bg-info">{{ __('Registro de Usuario') }}</div>
 
-                    <div class="card-body">
+                    <div class="card-body border-info">
                         <form id="formulario" method="POST" action="{{ route('register') }}">
                             @csrf
                             <div id="validateName">
@@ -105,7 +105,7 @@
 
                                             <div class="form-group row mb-0">
                                                 <div class="col-md-6 offset-md-4">
-                                                    <button id="enviar" type="submit" class="btn btn-primary">
+                                                    <button id="enviar" type="submit" class="btn btn-info">
                                                         {{ __('Registrar') }}
                                                     </button>
                                                 </div>

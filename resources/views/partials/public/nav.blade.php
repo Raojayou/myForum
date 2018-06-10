@@ -31,7 +31,7 @@
 
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
 
-                            <a class="dropdown-item" href="{{ url('/') }}/user/profile">
+                            <a class="dropdown-item" href="/user/{{ Auth()->user()->id }}">
                                 <i class="fas fa-user-circle"></i>
                                 {{ __('Perfil') }}
                             </a>

@@ -4,9 +4,10 @@
     <div class="container" style="margin-top: 35px">
         <div class="page-header page-heading">
             <h1 class="pull-left">Foro</h1>
-            <ol class="breadcrumb pull-right where-am-i">
-                <li class="active">Buscador <i class="fa fa-search fa-1x"></i></li>
-            </ol>
+            <form>
+                <input type="text" class="form-control pull-right col-2" id="search-input" placeholder="Buscar..."
+                       autocomplete="off">
+            </form>
             <div class="clearfix"></div>
         </div>
 
