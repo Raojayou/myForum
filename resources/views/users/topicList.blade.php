@@ -45,7 +45,8 @@
 
                                     <form action="/topics/delete/{{ $topic->id }}" method="post">
                                         <input type="hidden" name="_method" value="delete"/>
-                                        {!! csrf_field() !!}
+                                        {{ csrf_field() }}
+                                        {{ method_field('DELETE') }}
                                         <button id="enviar" type="submit" class="btn btn-success btn-default pull-center">
                                             <i class="fas fa-chevron-right text-light"></i> Continuar
                                         </button>
