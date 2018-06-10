@@ -12,7 +12,9 @@ $(function () {
 let cont = 0;
 
 function validateAll(e) {
+
     e.preventDefault();
+
     let button = $('button');
     button.prop("disabled", true);
 
@@ -79,18 +81,6 @@ function gestionarErrores(input, errores) {
         }
     }
     return hayErrores;
-}
-
-function showSpinner(input) {
-    if (input.parent().next().length === 0) {
-        let spin = $(".spinner").first().clone(true);
-        input.parent().after(spin);
-        spin.show();
-    }
-}
-
-function hideSpinner() {
-    $("#" + campo).parent().next().remove()
 }
 
 function loadData() {

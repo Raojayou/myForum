@@ -1,7 +1,8 @@
 @extends('layouts.app')
 
 @push('script-head')
-    <script src="{{ asset('js/validationForm.js') }}" defer></script>
+    <script src="{{ asset('js/modal.js') }}" defer></script>
+    <script src="{{ asset('js/delete.js') }}" defer></script>
 @endpush
 
 @section('content')

@@ -89,7 +89,9 @@ $(function () {
 var cont = 0;
 
 function validateAll(e) {
+
     e.preventDefault();
+
     var button = $('button');
     button.prop("disabled", true);
 
@@ -174,18 +176,6 @@ function gestionarErrores(input, errores) {
         }
     }
     return hayErrores;
-}
-
-function showSpinner(input) {
-    if (input.parent().next().length === 0) {
-        var spin = $(".spinner").first().clone(true);
-        input.parent().after(spin);
-        spin.show();
-    }
-}
-
-function hideSpinner() {
-    $("#" + campo).parent().next().remove();
 }
 
 function loadData() {

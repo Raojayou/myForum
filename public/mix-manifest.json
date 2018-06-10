@@ -3,5 +3,7 @@
     "/css/app.css": "/css/app.css",
     "/css/styles.css": "/css/styles.css",
     "/js/validationForm.js": "/js/validationForm.js",
-    "/js/validation.js": "/js/validation.js"
+    "/js/validation.js": "/js/validation.js",
+    "/js/modal.js": "/js/modal.js",
+    "/js/delete.js": "/js/delete.js"
 }
