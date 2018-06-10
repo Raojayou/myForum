@@ -100,9 +100,8 @@ class TopicsController extends Controller
         $topic = Topic::where('id', $id)->first();
 
         if ($topic != null) {
-            $topic->delete();
 
-            //$topic = Topic::find($id)->delete();
+            $topic = Topic::find($id)->delete();
             return redirect()->route('profile', [$user])->with('deleted', 'Tema borrado con éxito.');
         }
     }

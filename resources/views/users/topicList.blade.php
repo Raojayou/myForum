@@ -1,14 +1,13 @@
 <div>
-    @foreach($topics as $topic)
-        <table class="table table-bordered table-hover">
-            <thead>
-            <tr>
-                <th scope="col">Acciones</th>
-                <th scope="col">Tema</th>
-                <th scope="col">Fecha de creación</th>
-            </tr>
-            </thead>
-
+    <table class="table table-bordered table-hover">
+        <thead>
+        <tr>
+            <th scope="col">Acciones</th>
+            <th scope="col">Tema</th>
+            <th scope="col">Fecha de creación</th>
+        </tr>
+        </thead>
+        @foreach($topics as $topic)
             <tbody>
             <tr>
                 <td>
@@ -47,7 +46,8 @@
                                         <input type="hidden" name="_method" value="delete"/>
                                         {{ csrf_field() }}
                                         {{ method_field('DELETE') }}
-                                        <button id="enviar" type="submit" class="btn btn-success btn-default pull-center">
+                                        <button id="enviar" type="submit"
+                                                class="btn btn-success btn-default pull-center">
                                             <i class="fas fa-chevron-right text-light"></i> Continuar
                                         </button>
                                     </form>
@@ -80,5 +80,5 @@
                 </div>
             @endif
             </tbody>
-        </table>
+    </table>
 </div>
