@@ -29,6 +29,13 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::get('/user/{user}', 'UsersController@show')->name("profile");
 
+    // Rutas de administración
+    Route::get('/admin', 'AdminController@index')->name('admin.panel');
+    Route::get('/admin/topics', 'TopicsController@adminIndex')->name('admin.posts');
+    Route::get('/admin/topics/create', 'TopicsController@create');
+    Route::post('/admin/topics', 'TopicsController@store');
+    Route::get('/admin/topics/{topic}/edit', 'TopicsController@edit')->name('topics.edit');
+    Route::patch('/admin/topics/{topic}', 'TopicsController@patch')->name('topics.patch');
 
 });
 

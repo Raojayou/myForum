@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-md navbar-light navbar-laravel">
+<nav class="navbar navbar-expand-md navbar-dark navbar-laravel bg-dark">
     <div class="container">
         <a class="navbar-brand" href="{{ url('/') }}">
             {{ config('app.name', 'MyForum') }}
@@ -29,14 +29,14 @@
                         </a>
 
 
-                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <div class="dropdown-menu text-white bg-dark" aria-labelledby="navbarDropdown">
 
-                            <a class="dropdown-item" href="/user/{{ Auth()->user()->id }}">
+                            <a class="dropdown-item text-muted" href="/user/{{ Auth()->user()->id }}">
                                 <i class="fas fa-user-circle"></i>
                                 {{ __('Perfil') }}
                             </a>
 
-                            <a class="dropdown-item" href="{{ route('logout') }}"
+                            <a class="dropdown-item text-muted" href="{{ route('logout') }}"
                                onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
                                 <i class="fa fa-sign-out"></i>

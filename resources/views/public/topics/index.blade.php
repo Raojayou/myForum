@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('public.layouts.app')
 
 @section('content')
     @foreach($topics as $topic)

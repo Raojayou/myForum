@@ -50,7 +50,7 @@ class TopicsController extends Controller
      */
     public function create()
     {
-        return view('topics.create');
+        return view('admin.topics.create');
     }
 
     /**
@@ -102,7 +102,7 @@ class TopicsController extends Controller
         if ($topic != null) {
 
             $topic = Topic::find($id)->delete();
-            return redirect()->route('profile', [$user])->with('deleted', 'Tema borrado con éxito.');
+           // return redirect()->route('profile', [$user])->with('deleted', 'Tema borrado con éxito.');
         }
     }
 

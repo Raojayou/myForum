@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('admin.layouts.app')
 
 @push('script-head')
     <script src="{{ asset('js/validationForm.js') }}" defer></script>
@@ -11,10 +11,10 @@
                 <div class="panel panel-default">
                     <div class="card" style="width: 35rem;">
                         <div class="card-body">
-                            <div class="panel-heading">{{ __('Creación de Tema') }}</div>
+                            <div class="panel-heading">{{ __('Edición de Tema') }}</div>
                             <hr>
                             <div class="panel-body">
-                                <form id="form" action="{{ url('/') }}/topics/create" method="POST"
+                                <form id="form" action="{{ url('/') }}/topics/edit/{id}" method="POST"
                                       class="form-horizontal">
                                     {{ csrf_field() }}
 
@@ -91,7 +91,7 @@
                                         <div class="form-group">
                                             <div class="col-md-6 col-md-offset-4">
                                                 <button id="enviar" type="submit" class="btn btn-primary">
-                                                    {{ __('Añadir Tema') }}
+                                                    {{ __('Editar Tema') }}
                                                 </button>
                                             </div>
                                         </div>
