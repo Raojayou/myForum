@@ -37,6 +37,14 @@ class Topic extends Model
         return $this->belongsTo("App\User");
     }
 
+    public function tags()
+    {
+        return $this->belongsToMany(Tag::class);
+    }
+    /**
+     * @param User $user
+     * @return bool
+     */
     function isMine(User $user)
     {
         return $this->user_id === $user->id;

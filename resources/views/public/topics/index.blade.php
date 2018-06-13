@@ -9,6 +9,9 @@
                         <div class="card" style="width: 35rem;">
                             <div class="card-body">
                                 <a href="/topics/{{ $topic['id'] }}">{{ $topic['title'] }}</a>
+
+                                @include('public.partials.tags')
+
                             </div>
                         </div>
                     </div>

@@ -154,7 +154,7 @@ function validatePassword() {
     if (!password.match(regex) || password === "") {
         $('#password').removeClass('is-valid');
         $('#password').addClass('is-invalid');
-        $('#errorPassword').html("Error en la contraseña, mínimo 6 carácteres.").addClass('is-invalid');
+        $('#errorPassword').html("Error en la contraseña, mínimo 7 carácteres.").addClass('is-invalid');
     } else {
         $('#password').removeClass('is-invalid');
         $('#password').addClass('is-valid');

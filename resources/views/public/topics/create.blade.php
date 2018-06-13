@@ -89,6 +89,23 @@
                                         </div>
 
                                         <div class="form-group">
+                                            <label for="tags" class="col-md-4 control-label">{{ __('Tags') }}</label>
+                                            <div class="col-md-9">
+                                            <input type="text"
+                                                   class="form-control {{ $errors->has('tags') ? 'is-invalid' : '' }}"
+                                                   id="tags" name="tags" value="{{ $tags or old('tags') }}">
+                                            <small id="tagsHelp" class="form-text text-muted">Introduzca los tags del
+                                                tema
+                                            </small>
+                                            @if( $errors->has('tags') )
+                                                <div class="invalid-feedback">
+                                                    {{ $errors->first('tags') }}
+                                                </div>
+                                            @endif
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
                                             <div class="col-md-6 col-md-offset-4">
                                                 <button id="enviar" type="submit" class="btn btn-primary">
                                                     {{ __('Añadir Tema') }}

@@ -63,9 +63,8 @@
                         {{ method_field('DELETE') }}-->
                             <button id="enviar" type="submit"
                                     class="btn btn-success btn-default pull-center"
-                                    data-idTopicEnviar=""
-                            >
-                                <i class="fas fa-chevron-right text-light"></i> Continuar
+                                    data-idTopicEnviar="">
+                                <i class="fas fa-chevron-right text-light"></i> Aceptar
                             </button>
                             <!-- </form>-->
                         </div>

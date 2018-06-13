@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\CreateTopicAjaxRequest;
 use App\Http\Requests\CreateTopicRequest;
 use App\Http\Requests\UpdateTopicRequest;
+use App\Tag;
 use App\Topic;
 
 use Illuminate\Http\Request;
@@ -33,7 +34,7 @@ class TopicsController extends Controller
 
     public function adminIndex(Request $request)
     {
-        return view('admin.topics.index', ['posts' => $request->user()->adminTopics()]);
+        return view('admin.topics.index', ['topics' => $request->user()->adminTopics()]);
     }
 
     /**
@@ -67,14 +68,16 @@ class TopicsController extends Controller
 
     public function edit(Topic $topic)
     {
-        if (Gate::allows('canEdit', $topic)) {
-            return view('admin.topics.edit', ['topic' => $topic]);
+        if( Gate::allows('canEdit', $topic) ) {
+            return view('admin.posts.edit', [
+                'topic' => $topic,
+                'tags' => $topic->tags->pluck('name')->implode(', ')
+            ]);
         }
         return "Not allowed";
     }
 
     /**
-     *
      * @param CreateTopicRequest $request
      * @param Topic $topic
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
@@ -86,6 +89,20 @@ class TopicsController extends Controller
             'category' => $request->input('category'),
             'content' => $request->input('content'),
         ]);
+
+        $tags = explode(", ",\request('tags'));
+        //dd($tags);
+        $newTags = [];
+        foreach ($tags as $tag){
+            $tag = Tag::firstOrCreate([
+                'name' => $tag,
+                'slug' => str_slug($tag)
+            ]);
+            array_push($newTags, $tag);
+        }
+        //dd(collect($newTags)->pluck('id')->toArray());
+        $topic->tags()->sync(collect($newTags)->pluck('id')->toArray());
+
         $topic->update();
 
         return redirect('admin/topics');
@@ -125,8 +142,12 @@ class TopicsController extends Controller
         if ($topic != null) {
 
             $topic = Topic::find($id)->delete();
-            // return redirect()->route('profile', [$user])->with('deleted', 'Tema borrado con éxito.');
+
+//          return redirect()->route('profile', [$user])->with('deleted', 'Tema borrado con éxito.');
+
         }
+
+        return redirect('/');
     }
 
     /**
@@ -138,7 +159,9 @@ class TopicsController extends Controller
      */
     public function store(CreateTopicRequest $request)
     {
-        Topic::create([
+        $tags = explode(", ",\request('tags'));
+
+        $topic = Topic::create([
             'user_id' => Auth::user()->id,
             'title' => $request->input('title'),
             'slug' => str_slug(\request('title')),
@@ -146,6 +169,14 @@ class TopicsController extends Controller
             'content' => $request->input('content'),
 
         ]);
+
+        foreach ($tags as $tag){
+            $tag = Tag::firstOrCreate([
+                'name' => $tag,
+                'slug' => str_slug($tag)
+            ]);
+            $topic->tags()->attach($tag);
+        }
 
         return redirect('/');
     }

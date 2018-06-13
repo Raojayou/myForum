@@ -85,8 +85,10 @@ function deleteTopic() {
     var id = $('#enviar').attr("data-idTopicEnviar");
     axios.delete('/topics/delete/' + id).then(function (response) {
         console.log(response);
+        $("#myModal").modal("hide");
     }).catch(function (error) {
         console.log(error);
+        $("#myModal").modal("hide");
     }).then(function () {
         $('#enviar').attr("data-idTopicEnviar", "");
     });

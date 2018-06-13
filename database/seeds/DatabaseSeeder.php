@@ -16,13 +16,13 @@ class DatabaseSeeder extends Seeder
             'role' => 'admin'
         ]);
 
-//        factory(App\User::class, 5)->create()->each(function (App\User $user) {
-//            factory(\App\Topic::class, 1)->create([
-//                'user_id' => $user->id]);
-//          factory(App\Reply::class, 1)->create([
-//              'replies_id' => 1
-//          ]);
+        factory(App\Topic::class, 1)->create(['user_id' => 1])->each(function ($topic) {
+            $topic->tags()->save(factory(App\Tag::class)->make());
+        });
+
+        factory(App\Reply::class, 1)->create([
+            'topic_id' => 1
+        ]);
+
     }
 }
-
-

@@ -8,11 +8,14 @@ function deleteTopic() {
     axios.delete('/topics/delete/'+id)
         .then(function (response) {
             console.log(response);
+            $("#myModal").modal("hide");
         })
         .catch(function (error) {
             console.log(error);
+            $("#myModal").modal("hide");
         }).then(function(){
         $('#enviar').attr("data-idTopicEnviar","");
+
     });
 }
 
