@@ -10,7 +10,7 @@ class Topic extends Model
      * @var array
      */
     protected $table = 'topics';
-    protected $fillable = ['id','user_id','slug', 'title', 'category', 'content', 'created_at', 'updated_at'];
+    protected $fillable = ['id', 'user_id', 'slug', 'title', 'category', 'content', 'created_at', 'updated_at'];
 
     /**
      * This method modify the field that route binding works with.
@@ -23,11 +23,31 @@ class Topic extends Model
     {
         return 'slug';
     }
+
+    public function replies()
+    {
+        return $this->hasMany(Reply::class);
+    }
+
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
     public function user()
     {
         return $this->belongsTo("App\User");
+    }
+
+    function isMine(User $user)
+    {
+        return $this->user_id === $user->id;
+    }
+
+    public function addReply($content, $name, $email)
+    {
+        $this->replies()->create([
+            'name' => $name,
+            'email' => $email,
+            'content' => $content
+        ]);
     }
 }

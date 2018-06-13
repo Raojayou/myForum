@@ -27,11 +27,12 @@
                                 {{ $topic['category'] }}</p>
                             <p class="card-text font-weight-bold">Fecha de Creación:</p> {{ $topic['created_at'] }}
                         </div>
+                        <hr>
+                        @include('public.partials.replies')
                     </div>
                     <hr>
                 </div>
             </div>
         </div>
     </div>
-
 @endsection

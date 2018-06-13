@@ -36,7 +36,7 @@
     @yield('content')
 </div>
 
-<footer>
+<footer class="footer">
     <div class="container">
         <span class="text-muted">Encuentranos en nuestras redes sociales.
                 <a href="https://www.twitter.com/Raojayou1">
@@ -50,7 +50,5 @@
         </span>
     </div>
 </footer>
-
-@stack('scripts')
 </body>
 </html>

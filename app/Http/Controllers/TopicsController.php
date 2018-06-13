@@ -10,6 +10,7 @@ use App\Topic;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Gate;
 
 /**
  * Class TopicsController
@@ -27,7 +28,12 @@ class TopicsController extends Controller
         $topics = Topic::orderBy('created_at', 'asc')->paginate(4);
         // Here we send the data through the PHP function 'compact'
         // See Documentation: http://php.net/manual/es/function.compact.php
-        return view('topics.index', compact('topics'));
+        return view('public.topics.index', compact('topics'));
+    }
+
+    public function adminIndex(Request $request)
+    {
+        return view('admin.topics.index', ['posts' => $request->user()->adminTopics()]);
     }
 
     /**
@@ -40,7 +46,7 @@ class TopicsController extends Controller
     {
         $topic = Topic::where('id', $id)->first();
 
-        return view('topics.show', ['topic' => $topic]);
+        return view('public.topics.show', ['topic' => $topic]);
     }
 
     /**
@@ -50,7 +56,7 @@ class TopicsController extends Controller
      */
     public function create()
     {
-        return view('admin.topics.create');
+        return view('public.topics.create');
     }
 
     /**
@@ -58,16 +64,33 @@ class TopicsController extends Controller
      * @param $id
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function edit($id)
+
+    public function edit(Topic $topic)
     {
-
-//        $topic = Topic::where('id', $id)->first();
-
-        return view('topics.edit',
-            array('topic' => Auth::user())
-
-        );
+        if (Gate::allows('canEdit', $topic)) {
+            return view('admin.topics.edit', ['topic' => $topic]);
+        }
+        return "Not allowed";
     }
+
+    /**
+     *
+     * @param CreateTopicRequest $request
+     * @param Topic $topic
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     */
+    public function patch(CreateTopicRequest $request, Topic $topic) {
+        $topic->fill([
+            'title' => $request->input('title'),
+            'slug' => str_slug($request->input('title')),
+            'category' => $request->input('category'),
+            'content' => $request->input('content'),
+        ]);
+        $topic->update();
+
+        return redirect('admin/topics');
+    }
+
 
     /**
      * Función para actualizar el tema creado.
@@ -102,7 +125,7 @@ class TopicsController extends Controller
         if ($topic != null) {
 
             $topic = Topic::find($id)->delete();
-           // return redirect()->route('profile', [$user])->with('deleted', 'Tema borrado con éxito.');
+            // return redirect()->route('profile', [$user])->with('deleted', 'Tema borrado con éxito.');
         }
     }
 

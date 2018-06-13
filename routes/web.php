@@ -49,4 +49,6 @@ Route::get('/data/dataAjax', 'TopicsController@loadData');
 Route::get('/data/loadAjax', 'TopicsController@loadDataAjax');
 Route::post('/data/loadAjaxOne', 'TopicsController@loadDataAjaxOne');
 
+Route::resource('/tags', 'TagController');
+
 Auth::routes();

@@ -4,6 +4,7 @@ namespace App;
 
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Support\Facades\Auth;
 
 class User extends Authenticatable
 {
@@ -28,19 +29,19 @@ class User extends Authenticatable
     ];
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
-     */
-    public function hasTopic()
-    {
-        return $this->hasMany(User::class);
-    }
-
-    /**
      * @return \Illuminate\Database\Eloquent\Relations\HasOne
      */
     public function profile()
     {
         return $this->hasOne(User::class);
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function topics()
+    {
+        return $this->hasMany(Topic::class);
     }
 
     public function adminTopics()
@@ -53,6 +54,7 @@ class User extends Authenticatable
                 $topics = Topic::where('user_id', Auth::id())->paginate(20);
                 break;
         }
+
         return $topics;
     }
 }

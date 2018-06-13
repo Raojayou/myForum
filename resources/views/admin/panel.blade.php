@@ -2,18 +2,13 @@
 
 @section('content')
     <div class="container">
-        <div id="sidebar-wrapper" class="sidebar-toggle">
-            <ul class="sidebar-nav">
-                <li>
-                    <a href="#item1">Item 1</a>
-                </li>
-                <li>
-                    <a href="#item2">Item 2</a>
-                </li>
-                <li>
-                    <a href="#item3">Item 3</a>
-                </li>
-            </ul>
+        <div class="row main-area">
+            <div class="col-md-3">
+                @include('admin.partials.main_admin_panel_nav')
+            </div>
+            <div class="col-md-9">
+
+            </div>
         </div>
     </div>
 @endsection
