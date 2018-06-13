@@ -9,7 +9,7 @@
         </thead>
         @foreach($topics as $topic)
             <tbody>
-            <tr>
+            <tr id="topic{{$topic->id}}">
                 <td>
                     <a class="btn btn-default btn-outline-dark" href="{{ url('/') }}/topics/edit/{{ $topic['id'] }}"><i
                                 class="fa fa-pencil text-success"></i> Editar</a>
@@ -57,10 +57,6 @@
                                 <i class="fa fa-remove text-light"></i> Cancelar
                             </button>
 
-                        <!--<form action="/topics/delete/" method="post">
-                                        <input type="hidden" name="_method" value="delete"/>
-                                        {{ csrf_field() }}
-                        {{ method_field('DELETE') }}-->
                             <button id="enviar" type="submit"
                                     class="btn btn-success btn-default pull-center"
                                     data-idTopicEnviar="">

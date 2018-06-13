@@ -8,6 +8,7 @@ function deleteTopic() {
     axios.delete('/topics/delete/'+id)
         .then(function (response) {
             console.log(response);
+            $("#topic"+id).remove();
             $("#myModal").modal("hide");
         })
         .catch(function (error) {
