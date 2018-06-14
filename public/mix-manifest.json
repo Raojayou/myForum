@@ -1,9 +1,11 @@
 {
     "/js/app.js": "/js/app.js",
     "/css/app.css": "/css/app.css",
+    "/css/spinner.css": "/css/spinner.css",
     "/css/styles.css": "/css/styles.css",
     "/js/validationForm.js": "/js/validationForm.js",
     "/js/validation.js": "/js/validation.js",
     "/js/modal.js": "/js/modal.js",
-    "/js/delete.js": "/js/delete.js"
+    "/js/delete.js": "/js/delete.js",
+    "/js/create.js": "/js/create.js"
 }

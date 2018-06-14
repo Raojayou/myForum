@@ -45,11 +45,15 @@ function validate(field) {
     let data = {};
     data[field] = $("#" + field).val();
 
+    $("#" + field).next().css("display","block");
+
     axios.post('/topics/validate', data
     ).then(function (response) {
         gestionarErrores($("#" + field), response.data[field]);
     }).catch(function (error) {
         console.log(error);
+    }).then(function () {
+        $("#" + field).next().css("display","none");
     });
 }
 

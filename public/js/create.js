@@ -60,46 +60,36 @@
 /******/ 	__webpack_require__.p = "/";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 54);
+/******/ 	return __webpack_require__(__webpack_require__.s = 52);
 /******/ })
 /************************************************************************/
 /******/ ({
 
-/***/ 54:
+/***/ 52:
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(55);
+module.exports = __webpack_require__(53);
 
 
 /***/ }),
 
-/***/ 55:
+/***/ 53:
 /***/ (function(module, exports) {
 
 $(function () {
-    $('#enviar').on("click", deleteTopic);
-    $('button[name="btnModal"]').on("click", mostrarModal);
+    $('#enviar').on("click", create());
 });
 
-function deleteTopic() {
-    var id = $('#enviar').attr("data-idTopicEnviar");
-    axios.delete('/topics/delete/' + id).then(function (response) {
+function create(campo) {
+
+    var data = {};
+    data[campo] = $("#" + campo).val();
+
+    axios.post('/topics/create', data).then(function (response) {
         console.log(response);
-        $("#topic" + id).remove();
-        $("#myModal").modal("hide");
     }).catch(function (error) {
         console.log(error);
-        $("#myModal").modal("hide");
-    }).then(function () {
-        $('#enviar').attr("data-idTopicEnviar", "");
     });
-}
-
-function mostrarModal(e) {
-    var botonPulsado = e.target;
-    var idTopic = $(botonPulsado).attr("data-idTopic");
-    $('#enviar').attr("data-idTopicEnviar", idTopic);
-    $("#myModal").modal();
 }
 
 /***/ })

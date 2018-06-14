@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('public.layouts.app')
 
 @push('script-head')
     <script src="{{ asset('js/validationForm.js') }}" defer></script>

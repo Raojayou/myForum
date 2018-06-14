@@ -18,6 +18,8 @@ class CreateRepliesTable extends Migration
             $table->integer('topic_id');
             $table->string('content');
             $table->timestamps();
+
+            $table->foreign('topic_id')->references('id')->on('topics');
         });
     }
 

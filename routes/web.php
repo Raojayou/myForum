@@ -19,16 +19,20 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::group(['middleware' => 'auth'], function () {
     Route::redirect('/profile', '/profile/account', 302);
 
+    // CRUD
     Route::get('/topics/create', 'TopicsController@create');
     Route::get('/topics/edit/{id}', 'TopicsController@edit');
     Route::get('/topics/update/{id}', 'TopicsController@update');
     Route::delete('/topics/delete/{id}', 'TopicsController@delete');
 
-
+    // Guardar tema.
     Route::post('/topics/create', 'TopicsController@store');
+    // Crear/Guardar respuestas.
     Route::post('/topics/{id}/replies', 'RepliesController@store');
-    Route::post('/topics/validate', 'TopicsController@validateTopicAjax');
 
+    // Validación
+    Route::post('/topics/validate', 'TopicsController@validateTopicAjax');
+    // Perfíl
     Route::get('/user/{user}', 'UsersController@show')->name("profile");
 
     // Rutas de administración
@@ -48,6 +52,7 @@ Route::get('/topics/{id}', 'TopicsController@show');
 Route::post('/data/viewTopic','TopicsController@loadView');
 Route::post('/data/viewAllTopics','TopicsController@loadView');
 
+// Rutas de carga de datos asíncrona.
 Route::get('/data/dataAjax', 'TopicsController@loadData');
 Route::get('/data/loadAjax', 'TopicsController@loadDataAjax');
 Route::post('/data/loadAjaxOne', 'TopicsController@loadDataAjaxOne');

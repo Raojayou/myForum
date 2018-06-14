@@ -20,8 +20,12 @@ class CreateTopicsTable extends Migration
             $table->string('slug')->unique();
             $table->string('category');
             $table->text('content');
+            $table->string('tag')->nullable();
             $table->timestamps();
+
+            $table->foreign('user_id')->references('id')->on('users');
         });
+
     }
 
     /**
