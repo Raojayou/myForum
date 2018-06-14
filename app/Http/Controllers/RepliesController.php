@@ -12,22 +12,16 @@ class RepliesController extends Controller
     {
         if( ! Auth::user()){
             $this->validate(request(), [
-                'name' => 'required|min:5',
-                'email' => 'required|email',
                 'content' => 'required|min:2'
             ]);
-            $name = \request('name');
-            $email = \request('email');
         }else{
             $this->validate(request(), [
                 'content' => 'required|min:2'
             ]);
-            $name = Auth::user()->name;
-            $email = Auth::user()->email;
         }
 
         $topic = Topic::findOrFail($id);
-        $topic->addReply(request('message'), $name, $email);
+        $topic->addReply(request('content'));
 
         return back();
     }

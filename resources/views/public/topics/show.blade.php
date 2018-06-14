@@ -26,7 +26,16 @@
                             <p class="card-text"><a class="font-weight-bold">Categoría del Tema:</a><br>
                                 {{ $topic['category'] }}</p>
                             <p class="card-text font-weight-bold">Fecha de Creación:</p> {{ $topic['created_at'] }}
-                            <p class="card-text font-weight-bold">Etiquetas</p> @include('public.partials.tags')
+                            <p class="card-text font-weight-bold">Etiquetas</p>
+                            @include('public.partials.tags')
+
+                            <p class="card-text font-weight-bold">Respuestas</p>
+
+                            @foreach( $topic->replies as $reply)
+
+                                {{ $reply->content }}
+                                <p></p>
+                            @endforeach
                         </div>
                         <hr>
                         @include('public.partials.replies')

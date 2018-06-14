@@ -69,7 +69,7 @@ class TopicsController extends Controller
     public function edit(Topic $topic)
     {
         if( Gate::allows('canEdit', $topic) ) {
-            return view('admin.posts.edit', [
+            return view('admin.topics.edit', [
                 'topic' => $topic,
                 'tags' => $topic->tags->pluck('name')->implode(', ')
             ]);

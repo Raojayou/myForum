@@ -10,6 +10,7 @@ class Topic extends Model
      * @var array
      */
     protected $table = 'topics';
+
     protected $fillable = ['id', 'user_id', 'slug', 'title', 'category', 'content', 'created_at', 'updated_at'];
 
     /**
@@ -50,11 +51,9 @@ class Topic extends Model
         return $this->user_id === $user->id;
     }
 
-    public function addReply($content, $name, $email)
+    public function addReply($content)
     {
         $this->replies()->create([
-            'name' => $name,
-            'email' => $email,
             'content' => $content
         ]);
     }

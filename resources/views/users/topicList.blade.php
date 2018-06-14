@@ -11,13 +11,14 @@
             <tbody>
             <tr id="topic{{$topic->id}}">
                 <td>
-                    <a class="btn btn-default btn-outline-dark" href="{{ url('/') }}/topics/edit/{{ $topic['id'] }}"><i
-                                class="fa fa-pencil text-success"></i> Editar</a>
+                    <a class="btn btn-default btn-outline-dark" href="{{ url('/') }}/topics/edit/{{ $topic['id'] }}">
+                        <i class="fa fa-pencil text-success"></i> Editar</a>
 
                     <!-- Trigger the modal with a button -->
-                    <button name="btnModal" data-idTopic="{{$topic->id}}" type="button" class="btn btn-default btn-outline-dark"
+                    <button name="btnModal" data-idTopic="{{$topic->id}}" type="button"
+                            class="btn btn-default btn-outline-dark"
                             data-toggle="modal"
-                             >
+                    >
                         <i class="fa fa-remove text-danger"></i> Borrar
                     </button>
                     <!-- Modal -->
