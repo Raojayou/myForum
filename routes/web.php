@@ -29,8 +29,8 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('/topics/create', 'TopicsController@store');
 
     // Rutas Llamadas Asincronas
-    Route::get('/topics/edit/', 'AsyncController@formularioEditarTema')->name('topics.edit');
-    Route::put('/topics/update/', 'TopicsController@validacionUpdateTopicAjax')->name('topics.update');
+    Route::get('/topics/edit', 'AsyncController@formularioEditarTema')->name('topics.edit');
+    Route::post('/topics/validateUpdate', 'TopicsController@validacionUpdateTopicAjax')->name('validateUpdate');
 
     // Crear/Guardar respuestas.
     Route::post('/topics/{id}/replies', 'RepliesController@store');
@@ -40,6 +40,8 @@ Route::group(['middleware' => 'auth'], function () {
 
     // Perfíl
     Route::get('/user/{user}', 'UsersController@show')->name("profile");
+    // Ruta perfil con metodos asincronos
+// Route::get('/async/{id}', 'AsyncUserController@index')->name("profile.async");
 
     // Rutas de administración
     Route::get('/admin', 'AdminController@index')->name('admin.panel');
@@ -55,13 +57,11 @@ Route::group(['middleware' => 'auth'], function () {
 Route::get('/topics', 'TopicsController@index');
 Route::get('/topics/{id}', 'TopicsController@show');
 
-Route::post('/data/viewTopic','TopicsController@loadView');
-Route::post('/data/viewAllTopics','TopicsController@loadView');
-
 // Rutas de carga de datos asíncrona.
 Route::get('/data/dataAjax', 'TopicsController@loadData');
 Route::get('/data/loadAjax', 'TopicsController@loadDataAjax');
 Route::post('/data/loadAjaxOne', 'TopicsController@loadDataAjaxOne');
+Route::post('/data/viewAllTopics','TopicsController@loadView');
 
 Route::resource('/tags', 'TagController');
 

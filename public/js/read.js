@@ -60,48 +60,31 @@
 /******/ 	__webpack_require__.p = "/";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 58);
+/******/ 	return __webpack_require__(__webpack_require__.s = 54);
 /******/ })
 /************************************************************************/
 /******/ ({
 
-/***/ 58:
+/***/ 54:
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(59);
+module.exports = __webpack_require__(55);
 
 
 /***/ }),
 
-/***/ 59:
+/***/ 55:
 /***/ (function(module, exports) {
 
-// Delete a topic
-$(function () {
-    $('#enviar').on("click", deleteTopic);
-    $('button[name="btnModal"]').on("click", mostrarModal);
+// Show a topic
+$(document).on('click', '.show-modal', function () {
+    $('.modal-title').text('Show');
+    $('#id_show').val($(this).data('id'));
+    $('#title_show').val($(this).data('title'));
+    $('#category_show').val($(this).data('category'));
+    $('#content_show').val($(this).data('content'));
+    $('#showModal').modal('show');
 });
-
-function deleteTopic() {
-    var id = $('#enviar').attr("data-idTopicEnviar");
-    axios.delete('/topics/delete/' + id).then(function (response) {
-        console.log(response);
-        $("#topic" + id).remove();
-        $("#myModal").modal("hide");
-    }).catch(function (error) {
-        console.log(error);
-        $("#myModal").modal("hide");
-    }).then(function () {
-        $('#enviar').attr("data-idTopicEnviar", "");
-    });
-}
-
-function mostrarModal(e) {
-    var botonPulsado = e.target;
-    var idTopic = $(botonPulsado).attr("data-idTopic");
-    $('#enviar').attr("data-idTopicEnviar", idTopic);
-    $("#myModal").modal();
-}
 
 /***/ })
 

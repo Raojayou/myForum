@@ -7,7 +7,6 @@
                 @include('admin.partials.main_admin_panel_nav')
             </div>
             <div class="col-md-9">
-
             </div>
         </div>
     </div>

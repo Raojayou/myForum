@@ -7,13 +7,17 @@ use App\Http\Requests\CreateTopicRequest;
 use App\Http\Requests\UpdateTopicAjaxRequest;
 use App\Http\Requests\UpdateTopicRequest;
 use App\Tag;
+
 use App\Topic;
 
-use App\User;
+
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Facades\Input;
+use Illuminate\Support\Facades\Validator;
 
 /**
  * Class TopicsController
@@ -116,7 +120,6 @@ class TopicsController extends Controller
         return redirect('public.topics.edit');
     }
 
-
     /**
      * Función para actualizar el tema creado.
      * @param UpdateTopicRequest $request
@@ -128,13 +131,11 @@ class TopicsController extends Controller
         $user = User::where('nick', $nick)->first();
 
         $topic = Topic::find($id);
-
         $topic->fill([
             'title' => $request->input('title'),
             'category' => $request->input('category'),
             'content' => $request->input('content'),
         ]);
-
         $topic->update();
 
         return redirect('/topics/{id}');
@@ -187,7 +188,6 @@ class TopicsController extends Controller
             ]);
             $topic->tags()->attach($tag);
         }
-
         return redirect('/');
     }
 
@@ -203,14 +203,17 @@ class TopicsController extends Controller
     }
 
     /**
-     * Pasamos los parametros para validar el formulario de actualizar el perfil del usuario
+     * Pasamos los parametros para validar el formulario de actualizar el tema.
      *
      * @param UpdateTopicAjaxRequest $request
      * @return array
      */
-    protected function validacionUpdateTopicAjax(UpdateTopicAjaxRequest $request){
+    protected function validacionUpdateTopicAjax(UpdateTopicAjaxRequest $request)
+    {
+        //Obtenemos todos los valores y devolvemos un array vacío.
         return array();
     }
+
     public function loadData()
     {
         return view('data.dataAjax');
@@ -231,6 +234,7 @@ class TopicsController extends Controller
             ->offset($posicionInicial)
             ->limit($numElementos)
             ->get();
+
         return $topics;
     }
 
@@ -243,7 +247,8 @@ class TopicsController extends Controller
             ->limit($numElementos)
             ->get();
 
-        $view = view('topics.viewTopic', ['topics' => $topics]);
+        $view = view('topics.show', ['topics' => $topics]);
+
         return $view;
     }
 }

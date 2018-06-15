@@ -18,11 +18,11 @@
                     </div>
 
                     <div class="col-md-8">
-                        @include('users.topicList')
+                        @include('users.topicListAsync')
                     </div>
                 </div>
             </div>
-        <!-- ROW END -->
+            <!-- ROW END -->
         </section>
         <!-- SECTION END -->
     </div>

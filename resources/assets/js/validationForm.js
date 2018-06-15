@@ -116,7 +116,7 @@ function loadDataOne() {
 }
 
 function loadViewOne() {
-    axios.post('/topics/viewTopic',
+    axios.get('/data/viewAllTopics',
         {
             posicionInicial: cont,
             numeroElementos: 1

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\UpdateUserRequest;
 use App\Topic;
 use App\User;
+
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -70,8 +71,6 @@ class UsersController extends Controller
             ]
         );
     }
-
-
 
     /**
      * Remove the specified resource from storage.

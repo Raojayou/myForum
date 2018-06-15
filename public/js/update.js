@@ -60,145 +60,73 @@
 /******/ 	__webpack_require__.p = "/";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 54);
+/******/ 	return __webpack_require__(__webpack_require__.s = 56);
 /******/ })
 /************************************************************************/
 /******/ ({
 
-/***/ 54:
+/***/ 56:
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(55);
+module.exports = __webpack_require__(57);
 
 
 /***/ }),
 
-/***/ 55:
-/***/ (function(module, exports, __webpack_require__) {
+/***/ 57:
+/***/ (function(module, exports) {
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
-
-function formularioEditarTema() {
-    event.preventDefault();
-    $(event.target).addClass("active");
-    axios.get('/topics/edit').then(function (response) {
-        $("#formularioEditarTema").html(response.data);
-
-        asociarEventoAsincrono();
-        asociarValidaciones();
-    }).catch(function (error) {
-        console.log(error);
-    });
-}
-
-function asociarEventoAsincrono() {
-    $("#formularioEditarTemaBoton").on("click", formularioEditarTema);
-}
-
-$(function () {
-    asociarEventoAsincrono();
+// Update/Edit a topic
+$(document).on('click', '.edit-modal', function () {
+    $('.modal-title').text('Edit');
+    $('#id_edit').val($(this).data('id'));
+    $('#title_edit').val($(this).data('title'));
+    $('#category_edit').val($(this).data('title'));
+    $('#content_edit').val($(this).data('content'));
+    id = $('#id_edit').val();
+    $('#editModal').modal('show');
 });
+$('.modal-footer').on('click', '.edit', function () {
+    $.ajax({
+        type: 'PUT',
+        url: 'topics/' + id,
+        data: {
+            '_token': $('input[name=_token]').val(),
+            'id': $("#id_edit").val(),
+            'title': $('#title_edit').val(),
+            'category': $('#category_edit').val(),
+            'content': $('#content_edit').val()
+        },
+        success: function success(data) {
+            $('.errorTitle').addClass('hidden');
+            $('.errorCategory').addClass('hidden');
+            $('.errorContent').addClass('hidden');
 
-function gestionarErrores(input, errores) {
-    var noEnviarFormulario = false;
-    input = $(input);
-    if ((typeof errores === "undefined" ? "undefined" : _typeof(errores)) !== ( true ? "undefined" : _typeof(undefined))) {
-        input.removeClass("is-invalid");
-        input.addClass("is-invalid");
-        input.nextAll(".invalid-feedback").remove();
-        var _iteratorNormalCompletion = true;
-        var _didIteratorError = false;
-        var _iteratorError = undefined;
+            if (data.errors) {
+                setTimeout(function () {
+                    $('#editModal').modal('show');
+                    toastr.error('Error al editar!', 'Error Alert', { timeOut: 5000 });
+                }, 500);
 
-        try {
-            for (var _iterator = errores[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
-                var error = _step.value;
-
-                input.after("<div class=\"invalid-feedback\">\n                <strong> " + error + " </strong>\n            </div>");
-            }
-        } catch (err) {
-            _didIteratorError = true;
-            _iteratorError = err;
-        } finally {
-            try {
-                if (!_iteratorNormalCompletion && _iterator.return) {
-                    _iterator.return();
+                if (data.errors.title) {
+                    $('.errorTitle').removeClass('hidden');
+                    $('.errorTitle').text(data.errors.title);
                 }
-            } finally {
-                if (_didIteratorError) {
-                    throw _iteratorError;
+                if (data.errors.category) {
+                    $('.errorCategory').removeClass('hidden');
+                    $('.errorCategory').text(data.errors.category);
                 }
+                if (data.errors.content) {
+                    $('.errorContent').removeClass('hidden');
+                    $('.errorContent').text(data.errors.content);
+                }
+            } else {
+                toastr.success('Tema editado correctamente!', 'Success Alert', { timeOut: 5000 });
+                $('.item' + data.id).replaceWith("" + "<tr class='item" + data.id + "'>" + "<td>" + data.id + "</td>" + "<td>" + data.title + "</td>" + "<td>" + data.category + "</td>" + "<td>" + data.content + "</td>" + "<td class='text-center'>" + " <button class='edit-modal btn btn-info' data-id='" + data.id + "' data-title='" + data.title + "' data-category='" + data.category + "' data-content='" + data.content + "'>" + "<i class='fa fa-pencil text-success'></i> Edit</button></td></tr>");
             }
         }
-
-        noEnviarFormulario = true;
-    } else {
-        input.removeClass("is-invalid");
-        input.addClass("is-valid");
-        input.nextAll(".invalid-feedback").remove();
-    }
-    return noEnviarFormulario;
-}
-
-function validateTarget(target) {
-    var formData = new FormData();
-    formData.append(target.id, target.value);
-
-    $("#" + target).next().css("display", "block");
-
-    axios.post('/topics/update', formData).then(function (response) {
-
-        $("#" + target).next().css("display", "none");
-
-        switch (target.id) {
-            case "title":
-                gestionarErrores(target, response.data.title);
-                break;
-            case "category":
-                gestionarErrores(target, response.data.category);
-                break;
-            case "content":
-                gestionarErrores(target, response.data.content);
-                break;
-        }
-    }).catch(function (error) {
-        console.log(error);
     });
-}
-
-function asociarValidaciones() {
-    $("#title, #category, #content").on('change', function (e) {
-        validateTarget(e.target);
-    });
-
-    $("#botonFormularioEditarTema").click(function (e) {
-        e.preventDefault();
-        var enviarFormulario = true;
-        var formData = new FormData();
-
-        formData.append('title', $("#title").val());
-        formData.append('category', $("#category").val());
-        formData.append('content', $("#content").val());
-
-        axios.post('/topics/update', formData).then(function (response) {
-            if (gestionarErrores("#title", response.data.title)) {
-                enviarFormulario = false;
-            }
-
-            if (gestionarErrores("#category", response.data.category)) {
-                enviarFormulario = false;
-            }
-
-            if (gestionarErrores("#content", response.data.content)) {
-                enviarFormulario = false;
-            }
-
-            if (enviarFormulario === true) {
-                $("#formEditarTema").submit();
-            }
-        });
-    });
-}
+});
 
 /***/ })
 

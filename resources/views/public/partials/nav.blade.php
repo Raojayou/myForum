@@ -36,6 +36,11 @@
                                 {{ __('Panel de Administrador') }}
                             </a>
 
+                            {{--<a class="dropdown-item" href="{{ route('profile.async') }}">--}}
+                                {{--<i class="fas fa-user-circle"></i>--}}
+                                {{--{{ __('Perfil Asíncrono') }}--}}
+                            {{--</a>--}}
+
                             <a class="dropdown-item" href="/user/{{ Auth()->user()->id }}">
                                 <i class="fas fa-user-circle"></i>
                                 {{ __('Perfil') }}

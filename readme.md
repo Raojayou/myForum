@@ -45,7 +45,7 @@ Una vez descargado el proyecto, pasamos a la configuración, todos los pasos pue
 
 En primer lugar modificaremos el archivo Homestead.yaml ubicado en la carpeta Homestead.
 
-![alt text](//)
+![alt text](https://i.imgur.com/6us8WUV.jpg)
 
 **Hosts**
 
@@ -55,7 +55,7 @@ En _Windows_ la ruta sería: C:\Windows\System32\drivers\etc
 
 En _Linux_ se encuentra en: etc/hosts
 
-![alt text](//)
+![alt text](https://i.imgur.com/JDU3V1s.jpg)
 
 Una vez realizados todos estos pasos, encendemos la máquina virtual, al añadir una base de datos, será necesario utilizar el siguiente comando en la carpeta de _Homestead:_
 
@@ -71,7 +71,7 @@ Una vez realizado estos pasos, nos faltará configurar el archivo _.env_ del pro
 
 Para ello podemos renombramos el archivo _.env.example_ o creamos un archivo _.env_, en cualquier caso, la configuración deberá ser así:
 
-![alt text](//)
+![alt text](https://i.imgur.com/7Dwdn6T.jpg)
 
 Para generar 'APP_KEY, deberá utilizar el siguiente comando:'
 
@@ -83,7 +83,7 @@ Para la configuración de la base de datos, utilizará los datos del archivo _.e
 
 Accedemos a _Database -> New -> Data Source -> MySQL_
 
-![alt text](//)
+![alt text](https://i.imgur.com/LAVIlFw.jpg)
 
 **Instalación de los componentes de MyForum**
 
