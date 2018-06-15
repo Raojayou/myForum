@@ -19,7 +19,7 @@
                             <div class="panel-body">
                                 <form method="POST" action="{{ route('topics.patch', ['id' => $topic->id ]) }}">
                                     {{ csrf_field() }}
-                                    {{ method_field('PATCH') }}
+                                    {{ method_field('PUT') }}
 
                                     <div class="form-group{{ $errors->has('title') ? ' has-error' : '' }}">
                                         <label for="title"

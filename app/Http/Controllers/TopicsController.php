@@ -4,10 +4,12 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\CreateTopicAjaxRequest;
 use App\Http\Requests\CreateTopicRequest;
+use App\Http\Requests\UpdateTopicAjaxRequest;
 use App\Http\Requests\UpdateTopicRequest;
 use App\Tag;
 use App\Topic;
 
+use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -61,28 +63,34 @@ class TopicsController extends Controller
     }
 
     /**
-     * Función para editar el tema creado.
+     *
      * @param $id
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
 
-    public function edit(Topic $topic)
+    public function edit($id)
     {
-        if( Gate::allows('canEdit', $topic) ) {
-            return view('admin.topics.edit', [
+        $topic = Topic::where('id', $id)->first();
+
+        if (Gate::allows('canEdit', $topic)) {
+            return view('public.topics.edit', [
                 'topic' => $topic,
                 'tags' => $topic->tags->pluck('name')->implode(', ')
             ]);
         }
-        return "Not allowed";
+
+        return view('public.topics.edit', ['topic' => $topic]
+        );
     }
+
 
     /**
      * @param CreateTopicRequest $request
      * @param Topic $topic
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
-    public function patch(CreateTopicRequest $request, Topic $topic) {
+    public function patch(CreateTopicRequest $request, Topic $topic)
+    {
         $topic->fill([
             'title' => $request->input('title'),
             'slug' => str_slug($request->input('title')),
@@ -90,10 +98,10 @@ class TopicsController extends Controller
             'content' => $request->input('content'),
         ]);
 
-        $tags = explode(", ",\request('tags'));
+        $tags = explode(", ", \request('tags'));
         //dd($tags);
         $newTags = [];
-        foreach ($tags as $tag){
+        foreach ($tags as $tag) {
             $tag = Tag::firstOrCreate([
                 'name' => $tag,
                 'slug' => str_slug($tag)
@@ -105,7 +113,7 @@ class TopicsController extends Controller
 
         $topic->update();
 
-        return redirect('admin/topics');
+        return redirect('public.topics.edit');
     }
 
 
@@ -115,23 +123,27 @@ class TopicsController extends Controller
      * @param $id
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
-    public function update(CreateTopicRequest $request, $id)
+    public function update($id, $nick, CreateTopicRequest $request)
     {
+        $user = User::where('nick', $nick)->first();
+
         $topic = Topic::find($id);
 
-        $topic->update([
+        $topic->fill([
             'title' => $request->input('title'),
             'category' => $request->input('category'),
             'content' => $request->input('content'),
-
         ]);
-        return redirect("/edit");
+
+        $topic->update();
+
+        return redirect('/topics/{id}');
     }
 
     /**
      * Función para borrar el tema creado.
      * @param $id
-     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     * @return int
      */
     public function delete($id)
     {
@@ -157,7 +169,7 @@ class TopicsController extends Controller
      */
     public function store(CreateTopicRequest $request)
     {
-        $tags = explode(", ",\request('tags'));
+        $tags = explode(", ", \request('tags'));
 
         $topic = Topic::create([
             'user_id' => Auth::user()->id,
@@ -168,7 +180,7 @@ class TopicsController extends Controller
 
         ]);
 
-        foreach ($tags as $tag){
+        foreach ($tags as $tag) {
             $tag = Tag::firstOrCreate([
                 'name' => $tag,
                 'slug' => str_slug($tag)
@@ -190,6 +202,15 @@ class TopicsController extends Controller
         return array();
     }
 
+    /**
+     * Pasamos los parametros para validar el formulario de actualizar el perfil del usuario
+     *
+     * @param UpdateTopicAjaxRequest $request
+     * @return array
+     */
+    protected function validacionUpdateTopicAjax(UpdateTopicAjaxRequest $request){
+        return array();
+    }
     public function loadData()
     {
         return view('data.dataAjax');

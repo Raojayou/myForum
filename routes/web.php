@@ -22,16 +22,22 @@ Route::group(['middleware' => 'auth'], function () {
     // CRUD
     Route::get('/topics/create', 'TopicsController@create');
     Route::get('/topics/edit/{id}', 'TopicsController@edit');
-    Route::get('/topics/update/{id}', 'TopicsController@update');
+    Route::put('/topics/update/{id}', 'TopicsController@update');
     Route::delete('/topics/delete/{id}', 'TopicsController@delete');
 
     // Guardar tema.
     Route::post('/topics/create', 'TopicsController@store');
+
+    // Rutas Llamadas Asincronas
+    Route::get('/topics/edit/', 'AsyncController@formularioEditarTema')->name('topics.edit');
+    Route::put('/topics/update/', 'TopicsController@validacionUpdateTopicAjax')->name('topics.update');
+
     // Crear/Guardar respuestas.
     Route::post('/topics/{id}/replies', 'RepliesController@store');
 
     // Validación
     Route::post('/topics/validate', 'TopicsController@validateTopicAjax');
+
     // Perfíl
     Route::get('/user/{user}', 'UsersController@show')->name("profile");
 

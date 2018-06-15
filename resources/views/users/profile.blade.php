@@ -2,6 +2,7 @@
 
 @push('script-head')
     <script src="{{ asset('js/modal.js') }}" defer></script>
+    <script src="{{ asset('js/update.js') }}" defer></script>
     <script src="{{ asset('js/delete.js') }}" defer></script>
 @endpush
 

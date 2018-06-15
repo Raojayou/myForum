@@ -11,8 +11,9 @@
             <tbody>
             <tr id="topic{{$topic->id}}">
                 <td>
-                    <a class="btn btn-default btn-outline-dark" href="{{ url('/') }}/topics/edit/{{ $topic['id'] }}">
-                        <i class="fa fa-pencil text-success"></i> Editar</a>
+                    <button class="btn btn-default btn-outline-dark"
+                       href="{{ url('/') }}/topics/edit/{{ $topic['id'] }}">
+                        <i class="fa fa-pencil text-success"></i> Editar</button>
 
                     <!-- Trigger the modal with a button -->
                     <button name="btnModal" data-idTopic="{{$topic->id}}" type="button"
@@ -69,18 +70,12 @@
                 </div>
             </div>
 
-
             @if($topics->isEmpty())
                 <p>El usuario no ha creado ningún tema todavía.</p>
                 <a class="btn btn-info" href="{{ url('/topics/create') }}">
                     <i class="fas fa-plus text-light"></i> Añadir Tema</a>
             @endif
             <p></p>
-            @if (session('deleted'))
-                <div class="alert alert-danger">
-                    {{ session('deleted') }}
-                </div>
-            @endif
             </tbody>
     </table>
 </div>
