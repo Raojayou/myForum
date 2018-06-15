@@ -21,7 +21,7 @@ Route::group(['middleware' => 'auth'], function () {
 
     // CRUD
     Route::get('/topics/create', 'TopicsController@create');
-    Route::get('/topics/edit/{id}', 'TopicsController@edit');
+//    Route::get('/topics/edit/{id}', 'TopicsController@edit');
     Route::put('/topics/update/{id}', 'TopicsController@update');
     Route::delete('/topics/delete/{id}', 'TopicsController@delete');
 
@@ -48,8 +48,8 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/admin/topics', 'TopicsController@adminIndex')->name('admin.topics');
     Route::get('/admin/topics/create', 'TopicsController@create');
     Route::post('/admin/topics', 'TopicsController@store');
-    Route::get('/admin/topics/{topic}/edit', 'TopicsController@edit')->name('topics.edit');
-    Route::patch('/admin/topics/{topic}', 'TopicsController@patch')->name('topics.patch');
+    Route::get('/admin/topics/{id}/edit', 'TopicsController@edit')->name('topics.edit');
+    Route::patch('/admin/topics/{id}', 'TopicsController@patch')->name('topics.patch');
 
 });
 

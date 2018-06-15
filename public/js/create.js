@@ -115,7 +115,7 @@ $('.modal-footer').on('click', '.add', function () {
                     $('.errorContent').text(data.errors.content);
                 }
             } else {
-                toastr.success('Successfully added Post!', 'Success Alert', { timeOut: 5000 });
+                toastr.success('Tema añadido con éxito!', 'Success Alert', { timeOut: 5000 });
                 $('#topicsTable').prepend("<tr class='item" + data.id + "'>" + "<td class='col1'>" + data.id + "</td>" + "<td>" + data.title + "</td>" + "<td>" + data.category + "</td>" + "<td>" + data.content + "</td>" + "<td class='text-center'>" + "<td><button class='show-modal btn btn-success' data-id='" + data.id + "' data-title='" + data.title + "' data-category='" + data.category + "' data-content='" + data.content + "'>" + "<span class='glyphicon glyphicon-eye-open'></span> Show</button> " + "<button class='edit-modal btn btn-info' data-id='" + data.id + "' data-title='" + data.title + "' data-category='" + data.category + "' data-content='" + data.content + "'>" + "<span class='glyphicon glyphicon-edit'></span> Edit</button> " + "<button class='delete-modal btn btn-danger' data-id='" + data.id + "' data-title='" + data.title + "' data-category='" + data.category + "' data-content='" + data.content + "'>" + "<span class='glyphicon glyphicon-trash'></span> Delete</button></td></tr>");
 
                 $('.col1').each(function (index) {

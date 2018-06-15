@@ -69,7 +69,7 @@ class TopicsController extends Controller
     /**
      *
      * @param $id
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     * @return string
      */
 
     public function edit($id)
@@ -77,14 +77,12 @@ class TopicsController extends Controller
         $topic = Topic::where('id', $id)->first();
 
         if (Gate::allows('canEdit', $topic)) {
-            return view('public.topics.edit', [
+            return view('admin.topics.edit', [
                 'topic' => $topic,
                 'tags' => $topic->tags->pluck('name')->implode(', ')
             ]);
         }
-
-        return view('public.topics.edit', ['topic' => $topic]
-        );
+        return "No se puede editar";
     }
 
 
@@ -93,8 +91,10 @@ class TopicsController extends Controller
      * @param Topic $topic
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
-    public function patch(CreateTopicRequest $request, Topic $topic)
+    public function patch(CreateTopicRequest $request, $id)
     {
+        $topic = Topic::where('id', $id)->first();
+
         $topic->fill([
             'title' => $request->input('title'),
             'slug' => str_slug($request->input('title')),
@@ -117,7 +117,7 @@ class TopicsController extends Controller
 
         $topic->update();
 
-        return redirect('public.topics.edit');
+        return redirect('admin/topics');
     }
 
     /**

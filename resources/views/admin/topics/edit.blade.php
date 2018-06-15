@@ -14,12 +14,12 @@
                 <div class="panel panel-default">
                     <div class="card" style="width: 35rem;">
                         <div class="card-body">
-                            <div class="panel-heading">{{ __('Edición de Tema') }}</div>
+                            <div class="panel-heading">{{ __('Edición de Tema') }} - {{$topic->title}}</div>
                             <hr>
                             <div class="panel-body">
                                 <form method="POST" action="{{ route('topics.patch', ['id' => $topic->id ]) }}">
                                     {{ csrf_field() }}
-                                    {{ method_field('PUT') }}
+                                    {{ method_field('PATCH') }}
 
                                     <div class="form-group{{ $errors->has('title') ? ' has-error' : '' }}">
                                         <label for="title"
@@ -93,7 +93,7 @@
 
                                         <div class="form-group">
                                             <div class="col-md-6 col-md-offset-4">
-                                                <button id="enviar" type="submit" class="btn btn-primary">
+                                                <button type="submit" class="btn btn-primary">
                                                     {{ __('Editar Tema') }}
                                                 </button>
                                             </div>

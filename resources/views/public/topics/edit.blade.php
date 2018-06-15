@@ -19,7 +19,7 @@
                                     <form id="formEditarTema" method="POST" action="/topics/validateUpdate"
                                           role="form">
                                         {{ csrf_field() }}
-                                        {{ method_field('POST') }}
+                                        {{ method_field('PATCH') }}
 
                                         <div class="form-group{{ $errors->has('title') ? ' has-error' : '' }}">
                                             <label for="title"

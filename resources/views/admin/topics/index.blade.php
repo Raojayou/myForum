@@ -29,7 +29,7 @@
                         <tr id="topic{{$topic->id}}">
                             <td>
                                 <a class="btn btn-default btn-outline-dark"
-                                   href="{{ url('/') }}/topics/edit/{{ $topic['id'] }}"><i
+                                   href="{{ url('/') }}/admin/topics/{{ $topic['id'] }}/edit"><i
                                             class="fa fa-pencil text-success"></i> Editar</a>
 
                                 <!-- Trigger the modal with a button -->

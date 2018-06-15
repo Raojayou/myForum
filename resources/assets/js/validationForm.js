@@ -13,8 +13,6 @@ let cont = 0;
 
 function validateAll(e) {
 
-    e.preventDefault();
-
     let button = $('button');
     button.prop("disabled", true);
 
